@@ -1,0 +1,49 @@
+* {
+  margin: 0; /*消除浏览器的默认外边距*/
+  padding: 0; /*消除浏览器的默认内边距*/
+  list-style: none; /*设置列表标记的，默认会是实心圆点，设成none就是没有标记，该属性是一个简写属性，涵盖了所有其他列表样式属性。由于它应用到所有 display为 list-item 的元素，所以在普通的 HTML和XHTML中只能用于 li元素，不过实际上它可以应用到任何元素，并由 list-item 元素继承。*/
+  vertical-align: baseline; /*该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。*/
+}
+
+div {
+	position: relative; /*设置相对定位，方便后面点击事件出现的下划线定位*/
+	margin: auto;
+	width: 200px;
+	text-align: center;
+}
+
+h1 {
+	margin-top: 100px;
+	transition: color .8s; 
+}
+
+.change-style {
+	margin-top: 50px;
+	width: 100px;
+	height: 50px;
+	background: #fff;
+	border-style:none; /*消除按钮的默认样式*/
+	border-radius: 15%; /*设置按钮的圆角*/
+	border: 1px solid #E3E3E3; /*设置按钮的边框，大小为1px，样式为实线*/
+	box-shadow: 0 2px 3px #aaa; /*opera或ie9+设置边框阴影*/ 
+	-moz-box-shadow: 0 2px 3px #aaa; /*firefox*/ 
+	-webkit-box-shadow: 0 1px 3px #aaa;/*webkit*/ 
+	outline: none; /*设置按钮点击之后的样式为无，默认为一条蓝色线*/
+	font-size: 1.2em; 
+	font-weight: 600;
+}
+
+.underline {
+	width: 0;
+	height: 10px;
+	background: #406DEC;
+	position: absolute;
+	top: 40%; /*设置“前端学院”下面的下划线的位置*/
+	left: 50%; /*点击之前下划线在中间，点击之后从开始向两边延伸*/
+	transition: all .8s; /*相当于left .8s,width .8s*/
+}
+
+ /*.underline {
+   left: 0%;
+   width: 100%;
+}*/
