@@ -1,0 +1,55 @@
+* {
+  margin: 0; /*消除浏览器的默认外边距*/
+  padding: 0; /*消除浏览器的默认内边距*/
+}
+
+.boxContainer div {
+	float: left;
+	width: 60px;
+	height: 70px;
+	margin: 25px;
+	background: #f7f6f6;
+	border: 2px solid #ccc;
+	line-height: 60px;
+	text-align:	center;
+}
+
+.box1 {
+	transform:skewX(30deg); /*向左倾斜30度*/
+	-ms-transform: skew(30deg);	/* IE 9 */
+	-webkit-transform: skew(30deg);	/* Safari and Chrome */
+	-o-transform: skew(30deg);	/* Opera */
+	-moz-transform: skew(30deg);	/* Firefox */
+}
+
+.box2 {
+	transform: scaleX(.5); /*宽度减少一半*/
+	-ms-transform: scaleX(.5);	/* IE 9 */
+	-webkit-transform: scaleX(.5);	/* Safari 和 Chrome */
+	-o-transform: scaleX(.5);	/* Opera */
+	-moz-transform: scaleX(.5);	/* Firefox */
+}
+
+.box3 {
+	transform: rotate(45deg); /*旋转45度*/
+	-ms-transform: rotate(45deg);		/* IE 9 */
+	-webkit-transform: rotate(45deg);	/* Safari and Chrome */
+	-o-transform: rotate(45deg);		/* Opera */
+	-moz-transform: rotate(45deg);		/* Firefox */
+}
+
+.box4 {
+	transform: translate(10px,20px); /*向右移动10px,向下移动20px*/
+	-ms-transform: translate(10px,20px);		/* IE 9 */
+	-webkit-transform: translate(10px,20px);	/* Safari and Chrome */
+	-o-transform: translate(10px,20px);		/* Opera */
+	-moz-transform: translate(10px,20px);		/* Firefox */
+}
+
+.box5 {
+	transform: scaleX(0.5) translate(10px,20px) skewX(30deg) rotate(45deg); /*同时实现上述属性*/
+	-ms-transform: scaleX(0.5) translate(10px,20px) skewX(30deg) rotate(45deg); /* IE 9 */
+	-webkit-transform: scaleX(0.5) translate(10px,20px) skewX(30deg) rotate(45deg); /* Safari and Chrome */
+	-o-transform: scaleX(0.5) translate(10px,20px) skewX(30deg) rotate(45deg); /* Opera */
+	-moz-transform: scaleX(0.5) translate(10px,20px) skewX(30deg) rotate(45deg); /* Firefox */
+}
