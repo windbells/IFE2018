@@ -12,8 +12,8 @@ body {
 .main {
 	margin: 20px auto;
 	width: 70%;
-	/*height: 100%;
-	overflow:hidden;*/ /*解决自动高度的就不显示背景的方法1*/
+	height: 100%;
+	overflow:hidden; /*解决自动高度的就不显示背景的方法1*/
 	background: #EAEAEA;
 	line-height: 180%; /*设置页面所有字体的行距*/
 }
@@ -138,6 +138,6 @@ a:hover {
 	font-weight: 600;
 }
 
-.clear {
+/*.clear {
 	clear: both;
-}
+}*/
