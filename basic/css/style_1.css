@@ -1,0 +1,36 @@
+dl,
+dt,
+dd {
+	margin: 0;
+	padding: 0;
+} /*清除dl,dt,dd标签的内外边距*/
+
+.main {
+	margin: 0 20px; /*左右外边距20px*/
+}
+
+dt {
+	font-weight: 700;
+}
+
+dd {
+	font-weight: 550;
+}
+
+.message dt,
+.message dd,
+.contact dt,
+.contact dd {
+	display: inline; /*基本信息和个人主页的dt,dd元素显示在同一行*/
+}
+
+.message dd,
+.contact dd {
+	padding-right: 25px; /*基本信息和个人主页的dd元素距离右边的边距*/
+}
+
+.ability dd,
+.education dd,
+.project dd {
+	margin-bottom: 20px; /*设置能力，教育，项目的dd元素距离下方的距离*/
+}

@@ -1,0 +1,75 @@
+h1,
+h2,
+dl,
+dt,
+dd {
+	margin: 0;
+	padding: 0;
+	/*清除dl,dt,dd标签的内外边距*/
+	font-size: 0.8em;
+} 
+
+.main {
+	margin: 0 20px; /*左右外边距20px*/
+	width: 800px;
+}
+
+h1 {
+	padding-left: 30px;
+	width: 770px;
+	height: 50px;
+	line-height: 50px;
+	background: #848484;
+	color: #fff;
+}
+
+.message,
+.contact,
+.ability,
+.education,
+.project {
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	overflow: hidden;/*清除h2元素产生的浮动*/
+}
+
+h2 {
+	float: left;
+	width: 120px;
+	height: 120px;
+	background: #D6D6D6;
+	border-bottom: 1px solid #fff;
+	line-height: 120px;
+	text-align: center;
+}
+
+dl {
+	padding-top: 10px;
+}
+
+dt {
+	padding-left: 10px;
+} 
+
+dt,
+dd {
+	font-weight: 550;
+}
+
+.message dt,
+.message dd,
+.contact dt,
+.contact dd {
+	display: inline; /*基本信息和个人主页的dt,dd元素显示在同一行*/
+}
+
+.message dd,
+.contact dd {
+	padding-right: 15px; /*基本信息和个人主页的dd元素距离右边的边距*/
+}
+
+.ability dt,
+.education dt,
+.project dt {
+	float: left;
+}
