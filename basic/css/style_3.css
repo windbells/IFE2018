@@ -7,6 +7,7 @@ dd {
 	padding: 0;
 	/*清除dl,dt,dd标签的内外边距*/
 	font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;;
+	/*默认字体*/
 	font-size: .8em;
 } 
 

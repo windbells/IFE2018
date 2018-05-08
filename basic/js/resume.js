@@ -1,5 +1,5 @@
 window.onload = function() {
-//点击按钮实现样式切换
+	//点击按钮实现样式切换
 			var style1 = document.getElementById("sheet-1");
 			var style2 = document.getElementById("sheet-2");
 			var style3 = document.getElementById("sheet-3");
