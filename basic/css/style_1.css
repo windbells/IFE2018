@@ -34,3 +34,16 @@ dd {
 .project dd {
 	margin-bottom: 20px; /*设置能力，教育，项目的dd元素距离下方的距离*/
 }
+
+.change-style {
+	margin-top: 20px;
+}
+
+.change-style button {
+	margin-right: 12px;
+	width: 85px;
+	height: 40px;
+	border-style: none;
+	background: #65A4FA;
+	color: #fff;
+}

@@ -48,3 +48,16 @@ dd {
 .project dd {
 	margin-bottom: 20px;
 }
+
+.change-style {
+	margin-top: 50px;
+}
+
+.change-style button {
+	margin-right: 12px;
+	width: 85px;
+	height: 40px;
+	border-style: none;
+	background: #65A4FA;
+	color: #fff;
+}
