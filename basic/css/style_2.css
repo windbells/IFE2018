@@ -1,3 +1,8 @@
+* {
+	font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;;
+}
+/*默认字体*/
+
 dl,
 dt,
 dd {
@@ -50,7 +55,7 @@ dd {
 }
 
 .change-style {
-	margin-top: 50px;
+	margin-top: 60px;
 }
 
 .change-style button {
