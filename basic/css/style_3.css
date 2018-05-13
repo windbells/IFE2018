@@ -1,4 +1,4 @@
-h1,
+﻿h1,
 h2,
 dl,
 dt,
@@ -32,7 +32,9 @@ h1 {
 .project {
 	border-right: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
-	overflow: hidden;/*清除h2元素产生的浮动*/
+	overflow: auto; /*清除h2元素产生的浮动*/
+ 	zoom: 1;/*支持IE6*/
+	
 }
 
 h2 {
