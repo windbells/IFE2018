@@ -24,12 +24,14 @@ window.onload = function() {
 		  			result.innerHTML = "运算结果：" + sum;
 		  			break;
 		  		case "/":
-			  		if (Number(secNum) == 0) {
+			  		if (Number(secNum) === 0) {
 			  			console.log("除数不可以为0");
 			  			result.innerHTML = "除数不能为0";
 			  		}
-			  		sum = Number(firNum) / Number(secNum);
-		  			result.innerHTML = "运算结果：" + sum;
+			  		else {
+			  			sum = Number(firNum) / Number(secNum);
+		  				result.innerHTML = "运算结果：" + sum;
+			  		}
 		  			break;
 		  	}
 		 }
