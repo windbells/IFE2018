@@ -5,41 +5,62 @@
     <title>IFE ECMAScript</title>
 </head>
 <body>        
+	<!--编码1-->
     <input id="first-number" type="number" value="0" placeholder="第一个数字">
     <input id="second-number" type="number" value="0" placeholder="第二个数字">
     <button id="add-btn">加</button>
     <button id="minus-btn">减</button>
     <button id="times-btn">乘</button>
     <button id="divide-btn">除</button>
-    <p id="result">运算结果</p>
-    <script>   
-    window.onload = function () {
-    	var firNum = document.getElementById("first-number");
-    	var secNum = document.getElementById("second-number");
-    //加法
-		document.getElementById("add-btn").onclick = function() {
-			var result = parseFloat(firNum.value) + parseFloat(secNum.value);
-			document.getElementById("result").innerHTML = result;
-		}
-		
-		//减法
-		document.getElementById("minus-btn").onclick = function() {
-			var result = parseFloat(firNum.value) - parseFloat(secNum.value);
-			document.getElementById("result").innerHTML = result;
-		}
-		
-		//乘法
-		document.getElementById("times-btn").onclick = function() {
-			var result = parseFloat(firNum.value) * parseFloat(secNum.value);
-			document.getElementById("result").innerHTML = result;
-		}
-		
-		//除法
-		document.getElementById("divide-btn").onclick = function() {
-			var result = parseFloat(firNum.value) / parseFloat(secNum.value);
-			document.getElementById("result").innerHTML = result;
-		}
-	}
-    </script>
+    <p id="result">运算结果</p>  
+    <script>      
+    //编码1    	  
+    	var firInput = document.getElementById("first-number");
+		var secInput = document.getElementById("second-number");
+		var result = document.getElementById("result");
+		function calResult(type) {
+		  	var firNum = firInput.value;
+		    var secNum = secInput.value;
+		  	var sum = 0;
+		  	if (!((Number(firNum)|| firNum === '0') && (Number(secNum)|| secNum === '0'))) {
+		  		console.log("请输入正确的数字");
+		  	}
+		  	switch(type) {
+		  		case "+":
+		  			sum = Number(firNum) + Number(secNum);
+		  			result.innerHTML = "运算结果：" + sum;
+		  			break;
+		  		case "-":
+		  			sum = Number(firNum) - Number(secNum)
+		  			result.innerHTML = "运算结果：" + sum;
+		  			break;
+		  		case "*":
+		  			sum = Number(firNum) * Number(secNum);
+		  			result.innerHTML = "运算结果：" + sum;
+		  			break;
+		  		case "/":
+			  		if (Number(secNum) == 0) {
+			  			console.log("除数不可以为0");
+			  			result.innerHTML = "除数不能为0";
+			  		}
+			  		sum = Number(firNum) / Number(secNum);
+		  			result.innerHTML = "运算结果：" + sum;
+		  			break;
+		  	}
+		 }
+		  
+		document.getElementById("add-btn").addEventListener("click",function() {
+		  	calResult("+");
+		});
+		document.getElementById("minus-btn").addEventListener("click",function() {
+		  	calResult("-");
+		});
+		document.getElementById("times-btn").addEventListener("click",function() {
+		  	calResult("*");
+		});
+	  	document.getElementById("divide-btn").addEventListener("click",function() {
+		  	calResult("/");
+		 });
+	</script>
 </body>
 </html>
