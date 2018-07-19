@@ -111,7 +111,8 @@ a:hover {
 }
 
 .main-right .message .mixed-ability,
-.main-right .message .hobby {
+.main-right .message .hobby,
+.main-right .message #time {
 	font-size: 0.6em;
 	letter-spacing: 10px;
 }
