@@ -1,0 +1,721 @@
+/* 引入字体 */
+@font-face {
+  font-family: "ProximaNova";
+  src: url("../font/ProximaNova-Regular.otf") format("truetype");
+}
+
+html,
+body {
+	  height: 100%;
+}
+
+body {
+  /* 设置最小宽度 */
+  min-width: 1170px;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 14px;
+  font-family: "ProximaNova", Geneva, sans-serif;
+}
+
+/*去除公有元素的默认样式*/
+h1,
+h2 {
+  font-weight: 400;
+}
+
+h1, 
+h2,
+h3, 
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+input{    
+    background: none;    
+    outline: none;    
+    border: 0;  
+} 
+
+input:focus { 
+	outline: none; 
+}  
+
+button {
+	border: none;
+	outline: none;
+}
+
+/*网页内容*/
+.website {
+	position: relative;
+	display: flex;
+	height: 100%;
+	background: #fff;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.sidebar {
+	display: flex;
+	width: 350px; /*设置侧边栏的宽度*/
+}
+
+/*侧边栏第一栏*/
+.fir {
+	height: 100%; /*高度自适应浏览器*/
+	background: #1d2531;
+}
+
+.app {
+	display: block;
+	margin: 20px;
+	width: 60px;
+	height: 60px;
+}
+
+/*设置第一栏的APP图案背景*/
+.app1 {
+	background: url(../img/Item-1.png);
+}
+
+.app2 {
+	background: url(../img/Item-2.png);
+}
+
+.app3 {
+	background: url(../img/Item-3.png);
+}
+
+.item-add-app {
+	background: url(../img/Item-4.png);
+}
+
+/*第一栏的第一个APP图案以及第二栏message左边的蓝色半圆*/
+.app-active:before,
+.menu-active:before {
+	content: '';
+  position: absolute;
+  top: 50px;
+  left: -2px;
+  width: 4px;
+  height: 4px;
+  background-color: #2399f1;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+/*设置底部的按钮属性和位置*/
+.fir .btn-action {
+	position: absolute;
+	display: inline-block;
+	bottom: 20px;
+	width: 16px;
+	height: 16px;
+}
+
+.btn-grid {
+	left: 25px;
+	background: url(../img/Grid-Icon.png);
+}
+
+.btn-settings {
+	left: 60px;
+	background: url(../img/Settings-Icon.png);
+}
+
+/*侧边栏第二栏*/
+.sec {
+	position: relative;
+	width: 250px;
+	height: 100%;
+	background: #222c3c;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+/*其他浏览器隐藏滚动条方法*/
+.menu-group,
+.chats {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.menu-group {
+	right: -17px;
+	margin-bottom: 50px; /*因为padding造成下面的app settins内容不能显示,所以增加的外边距*/
+	padding: 10px 30px 25px;
+}
+
+/*适用于谷歌浏览器，隐藏滚动条*/
+.menu-group::-webkit-scrollbar,
+.chats::-webkit-scrollbar,
+.main-dialog::-webkit-scrollbar {
+    display: none;
+}
+
+.menu {
+	padding-top: 20px;
+}
+
+.menu-title {
+	padding-bottom: 20px;
+	font-size: 12px;
+	color: #5b6779;
+	text-transform: uppercase;
+}
+
+.h1-icon {
+	display: inline-block;
+	float: right;
+	width: 16px;
+	height: 16px;
+	background: url(../img/Settings-Icon.png);
+}
+
+.list-item {
+	padding-bottom: 16px;
+	color: #b7c0cd;
+}
+
+.li-icon {
+	text-indent: 25px;/*与文字的距离，也就是文字会空多少距离显示*/
+}
+
+.li-icon1 {
+	background:url(../img/Book-of-Wisdom-Icon.png) no-repeat;/*将li标签前面的点替换为图片*/
+}
+
+.li-icon2 {
+	background: url(../img/Video-Camera-Icon.png) no-repeat;
+}
+
+.li-icon3 {
+	background: url(../img/Painting_Icon.png) no-repeat;
+}
+
+.li-icon4 {
+	background: url(../img/Chart-Icon.png) no-repeat;
+}
+
+/*设置蓝色按钮和提醒按钮的样式*/
+.tip-icon,
+.alert-icon {
+	float: right;
+	width: 32px;
+	height: 24px;
+	border-radius: 12px;
+	background: #259bf3;
+	color: #fff;
+}
+
+.alert-icon {
+	width: 24px;
+	background: url(../img/Alert-icon.png);
+}
+
+/*高亮的message文字*/
+.menu-active {
+	color: #fff;
+}
+
+.menu-active:before {
+	top: 530px;
+}
+
+.divider {
+	width: 190px;
+	height: 1px;
+	background: #2a3547;
+}
+
+/*第二栏底部*/
+.menu-goal {
+	position: absolute;
+	bottom: 0;
+	left: 20px;
+	z-index: 1;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	background: #222c3c;
+	color: #fff;
+}
+
+.goal-text {
+	padding-bottom: 10px;
+}
+
+.goal-text:first-child {
+	padding-right: 15px;
+}
+
+.base-percentage,
+.fill-percentage {
+	margin-top: 10px;
+	height: 4px;
+	border-radius: 12px;
+}
+
+.base-percentage {
+	width: 190px;
+	background: #2d3848;
+}
+
+.fill-percentage {
+	margin-top: -4px;
+	width: 40px;
+	background: #896be6;
+}
+
+
+/*白色主要内容区域*/
+.main {
+  position: relative;
+	width: 100%;
+}
+
+header {
+	border-bottom: 1px solid #e6e9ec;
+}
+
+.message {
+	margin: 25px 0 25px 30px;
+	font-size: 24px;
+	color: #354052;
+}
+
+/*右上角人物的信息固定位置*/
+.profile .avatar,
+.profile-text,
+.dropdown-icon {
+	position: absolute;
+}
+
+.profile .avatar {
+	top: 12px;
+	right: 180px;
+	width: 50px;
+	height: 50px;
+	background: url(../img/profile.png);
+	border-radius: 50%;
+}
+
+.profile-text {
+	top: 20px;
+	right: 80px;
+}
+
+.profile .user-name {
+	font-size: 16px;
+	color: #2399f1;
+}
+
+.role {
+	color: #b5b5b5;
+}
+
+.dropdown-icon {
+	top: 35px;
+	right: 30px;
+	display: inline-block;
+	width: 11px;
+	height: 7px;
+	background: url(../img/dropdown-icon.png);
+}
+
+/*搜索框样式*/
+.search-box {
+	height: 69px;
+	border-right: 1px solid #e6e9ec;
+	border-bottom: 1px solid #e6e9ec;
+}
+
+
+.search {
+	margin: 17px 30px;
+	padding: 12px;
+	width: 340px;
+	height: 36px;
+	border: 1px solid #e6e9ec;
+	background: url(../img/Search-icon.png) 312px no-repeat; /*设置输入框的右边有一个放大镜图标*/
+	color: #9fa9ba;
+	line-height: 36px; /*设置文字垂直居中*/
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+/*白色主区域左边固定区域*/
+.chats-box {
+	position: relative;
+  width: 400px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.chats {
+	display: -webkit-flex; /* Safari */
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  margin-top: 69px;
+  margin-bottom: 105px;
+  box-sizing: border-box;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 15px 20px 0 30px;
+  width: 400px;
+  border-right: 1px solid #e6e9ec;
+  border-bottom: 1px solid #e6e9ec;
+  box-sizing: border-box;
+}
+
+/*设置第一个聊天人物左边的边框为蓝色*/
+.chat-active {
+	border-left: 3px solid #2399f1;
+	color: #585d68;
+}
+
+.status {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background: #2399f1;
+	border-radius: 50%;
+}
+
+.chat-info {
+	position: relative;
+	padding-bottom: 10px;
+}
+
+.user-info {
+	padding-left: 66px;
+}
+
+.chat .avatar,
+.mes .avatar {
+	position: absolute; /*将图片固定在左上角*/
+	top: 0;
+	left: 0;
+	margin-right: 18px;
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #585d68;
+}
+
+.user-active {
+	color: #2399f1;
+}
+
+.chat-time {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-weight: 600;
+	color: #7f8fa4;
+}
+
+.chat-from {
+	font-size: 14px;
+	font-weight: 400;
+	color: #b5b5b5;
+}
+
+.content-text {
+	padding-bottom: 20px;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis; /*超出的文本部分用省略号表示*/
+  line-height: 19px;
+}
+
+.chat-active .content-text {
+	width: 310px;
+}
+
+.chat-active .content-text:after {
+	content: "4";
+	position: absolute;
+	right: 20px;
+	margin-top: -13px;
+	width: 24px;
+	height: 24px;
+	background: #2399f1;
+	color: #fff;
+	text-align: center; /*设置圆里面的文字居中*/
+	line-height: 24px; /*设置圆里面的文字居中*/
+	border-radius: 50%;
+}
+
+/*设置聊天头像*/
+.avatar1 {
+	background: url(../img/Face_1.png) center;
+}
+
+.avatar2 {
+	background: url(../img/Face_2.png) center;
+}
+
+.avatar3 {
+	background: url(../img/Face_3.png) center;
+}
+
+.avatar4 {
+	background: url(../img/Face_4.png) center;
+}
+
+.avatar5 {
+	background: url(../img/Face_5.png) center;
+}
+
+.avatar6 {
+	background: url(../img/Face_6.png) center; 
+}
+
+.avatar7 {
+	background: url(../img/Face_7.png) center;
+}
+
+.avatar8 {
+	background: url(../img/Face_8.png);
+}
+
+/*白色主区域右边区域*/
+.dialog-box {
+	position: absolute;
+  top: 87px;
+  left: 400px;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  height: 100%;
+  /*flex-wrap: wrap;*/
+  overflow: hidden;
+	box-sizing: border-box;
+}
+
+/*chat-one-of*/
+.dialog-info {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	height: 69px;
+	border-bottom: 1px solid #e6e9ec;
+}
+
+.chat-name {
+	flex: auto;
+	padding-left: 25px;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: 600;
+  color: #585d68;
+}
+
+/*名字后面的小绿点*/
+.chat-name:after {
+	content: "";
+	display: inline-block;
+	margin-left: 10px;
+	width: 8px;
+	height: 8px;
+	background: #1bb934;
+	border-radius: 50%;
+}
+
+.chat-icon {
+	width: 35px;
+	height: 30px;
+	border-radius: 5%;
+	border: 1px solid #e6e9ec;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.tools,
+.chat-one-of-text,
+.arrow {
+	display: flex;
+}
+
+.arrow {
+	margin-left: 10px;
+}
+
+.tool-icon1 {
+	background-image: url(../img/User-icon.png);
+}
+
+.tool-icon2 {
+	background-image: url(../img/Upload-icon.png);
+}
+
+.tool-icon3 {
+	background-image: url(../img/Trash-icon.png);
+}
+
+.arrow-left {
+	background-image: url(../img/Arrow-left.png);
+}
+
+.arrow-right {
+	background-image: url(../img/Arrow-right.png);
+}
+
+.chat-one-of-text {
+	margin-left: 40px;
+	color: #56688a;
+}
+
+/*主要聊天区域*/
+.mes {
+	position: relative;
+	display: flex;
+  flex-direction: column;
+  margin: 15px 20px 0 30px;
+  box-sizing: border-box;
+}
+
+.mes-time {
+	padding-left: 5px;
+	font-weight: 600;
+  color: #7f8fa4;
+}
+
+.mes-text {
+	margin-left: 66px;
+	line-height: 19px;
+	color: #585d68;
+}
+
+.dialog-divider {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 5px;
+	width: 100%;
+	height: 20px;
+}
+
+.line {
+	flex-grow: 1;
+	height: 1px;
+  background-color: #e6e9ec;
+}
+
+.divider-text {
+	margin: 0 5px;
+	color: #7f8fa4;
+}
+
+.new-line {
+	background: #2399f1;
+}
+
+.new-text {
+	color: #2399f1;
+}
+
+.photos {
+	margin-left: 66px;
+}
+
+.photo {
+	position: relative;
+	margin-top: 12px;
+	width: 156px;
+	height: 100px;
+	border-radius: 7px;
+}
+
+.add-photo {
+	position: absolute;
+  top: 69%;
+  left: 50%;
+  z-index: 2;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+	background: url(../img/Open-icon.png) no-repeat;
+}
+
+.add-photo:hover {
+	cursor: pointer;
+}
+
+.photo1 {
+	margin-right: 5px;
+	background: url(../img/Photo_1.png);
+}
+
+.photo2 {
+	background: url(../img/Photo_2.png);
+}
+
+.main-dialog {
+	margin-bottom: 87px;
+	height: 100%;
+	overflow: auto;
+}
+
+.mes-content {
+	overflow: auto;
+}
+
+.add-mes {
+	display: flex;
+  margin-top: 25px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  border: 1px solid #dfe3e9;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.add-mes-icon {
+	display: inline-block;
+	width: 52px;
+	height: 52px;
+	border: 1px solid #ced0da;
+	background: url(../img/Add-icon.png) center no-repeat;
+	box-sizing: border-box;
+}
+
+.add-input {
+	padding: 0 30px 0 20px;
+	width: 100%;
+	height: 52px;
+	border-left: 1px solid #dfe3e9;;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+	color: #585d68;
+}

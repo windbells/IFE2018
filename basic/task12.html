@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport"  content ="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no" >
+		<meta name="author" content="kina" />
+		<title>第十二天到第十五天，复杂页面实现</title>
+		<link rel="stylesheet" href="css/task-12.css" />
+	</head>
+	<body>
+		<div class="website">
+			
+			<!--侧边栏-->
+			<aside class="sidebar">
+				<div class="fir">
+					<a href="javascript:" class="app app1 app-active" ></a>
+					<a href="javascript:" class="app app2"></a>
+					<a href="javascript:" class="app app3"></a>
+					<a href="javascript:" class="app item-add-app"></a>
+					<div class="fir-footer">
+						<a href="javascript:" class="btn-action btn-grid"></a>
+						<a href="javascript:" class="btn-action btn-settings"></a>
+					</div>
+				</div>
+				<div class="sec">
+					<div class="menu-group">
+						<div class="menu">
+							<h1 class="menu-title">
+								<span class="menu-text">Menu</span>
+								<i class="h1-icon"></i>
+							</h1>
+							<ul class="menu-list">
+								<li class="list-item">Overview</li>
+								<li class="list-item">
+									<span>Sales</span>
+									<button class="tip-icon">54</button>
+								</li>
+								<li class="list-item">Your Staff</li>
+								<li class="list-item">Analytics & Targeting</li>
+								<li class="list-item">What’s New</li>
+							</ul>
+							<div class="divider"></div>
+						</div>
+						<div class="menu">
+							<h1 class="menu-title">
+								<span class="menu-text">Your Products</span>
+								<i class="h1-icon"></i>
+							</h1>
+							<ul class="menu-list">
+								<li class="list-item li-icon li-icon1 ">Books</li>
+								<li class="list-item li-icon li-icon2">Tutorials</li>
+								<li class="list-item li-icon li-icon3">Stocks</li>
+								<li class="list-item li-icon li-icon4">Infographics</li>
+							</ul>
+							<div class="divider"></div>
+						</div>
+						<div class="menu">
+							<h1 class="menu-title">
+								<span class="menu-text">Dashboard</span>
+								<i class="h1-icon"></i>
+							</h1>
+							<ul class="menu-list">
+								<li class="list-item">
+									<span class="menu-active">Messages</span>    
+									<button class="tip-icon">21</button>
+								</li>
+								<li class="list-item">Connections</li>
+								<li class="list-item">
+									<span>Integrations</span>    
+									<button class="alert-icon"></button>
+								</li>
+								<li class="list-item">Account Settings</li>
+								<li class="list-item">App Settings</li>
+							</ul>
+						</div>
+					</div>	
+					<div class="menu-goal">
+						<span class="goal-text">Monthly Goals</span>
+						<span class="goal-text">$580/$3200</span>
+						<div class="base-percentage"></div>
+						<div class="fill-percentage"></div>
+					</div>
+				</div>
+			</aside>
+			
+			<!--白色内容主区域-->
+			<article class="main">
+				<header>
+					<p class="message">Messages</p>
+					<div class="profile">
+						<img class="avatar" />
+						<div class="profile-text">
+							<p class="user-name">Jordan J.</p>
+							<p class="role">Administrator</p>
+						</div>
+						<i class="dropdown-icon"></i>
+					</div>
+				</header>
+				<section class="chats-box">
+					<section class="search-box">
+						<input class="search" type="text" placeholder="Search" />
+					</section>
+					<div class="chats">
+						<div class="chat chat-active">
+							<div class="chat-info">
+								<img class="avatar avatar1" />
+								<div class="user-info">
+									<i class="status"></i>
+									<span class="user-name user-active">Bessie Berry</span>
+									<span class="chat-time">3m</span>
+									<p class="chat-from">Twitter</p>
+								</div>							
+							</div>
+							<div class="chat-content">
+								<p class="content-text">
+									I pay for the 4Mb/sec down, 512 Kb/sec up service from O2. In fact, it's relatively quick, and stable
+								</p> 
+							</div>
+						</div>
+						<div class="chat">
+							<div class="chat-info">
+								<img class="avatar avatar2" />
+								<div class="user-info">
+									<span class="user-name">Victor Weber</span>
+									<span class="chat-time">8m</span>
+									<p class="chat-from">Adobe</p>
+								</div>							
+							</div>
+							<div class="chat-content">
+								<p class="content-text">
+									I shared this on my fb wall a few months back, and I thought I'd share it here again because it's such a great...
+								</p> 
+							</div>
+						</div>
+						<div class="chat">
+							<div class="chat-info">
+								<img class="avatar avatar3" />
+								<div class="user-info">
+									<span class="user-name">Dustin Benson</span>
+									<span class="chat-time">Yesterday</span>
+									<p class="chat-from">Facebook</p>
+								</div>							
+							</div>
+							<div class="chat-content">
+								<p class="content-text">
+									If there is anyone who needs an invitation please add yourself in the comments of this post!
+								</p> 
+							</div>
+						</div>
+						<div class="chat">
+							<div class="chat-info">
+								<img class="avatar avatar4" />
+								<div class="user-info">
+									<span class="user-name">Jack Mason</span>
+									<span class="chat-time">Yesterday</span>
+									<p class="chat-from">Yahoo</p>
+								</div>							
+							</div>
+							<div class="chat-content">
+								<p class="content-text">
+									BruteDC is a peer-to-peer movie+tv series sharing and downloading platform which works on intranet inside...
+								</p> 
+							</div>
+						</div>
+						<div class="chat">
+							<div class="chat-info">
+								<img class="avatar avatar5" />
+								<div class="user-info">
+									<span class="user-name">Stephen Shelton</span>
+									<span class="chat-time">13 Jun</span>
+									<p class="chat-from">Snapchat</p>
+								</div>							
+							</div>
+							<div class="chat-content">
+								<p class="content-text">
+									Yes, p2p traffic is often filtered (QoSed). Although i do use BT on O2 wires, and in good days dl speed...
+								</p> 
+							</div>
+						</div>
+						<div class="chat">
+							<div class="chat-info">
+								<img class="avatar avatar6" />
+								<div class="user-info">
+									<span class="user-name">Sally Willis</span>
+									<span class="chat-time">12 Jun</span>
+									<p class="chat-from">Twitter</p>
+								</div>							
+							</div>
+							<div class="chat-content">
+								<p class="content-text">
+									Yes, it's O2: 'internet extreme', which is no longer offered.
+								</p>
+							</div>
+						</div>
+						<div class="chat">
+							<div class="chat-info">
+								<img class="avatar avatar7" />
+								<div class="user-info">
+									<span class="user-name">Robert Patton</span>
+									<span class="chat-time">9 Jun</span>
+									<p class="chat-from">A Team</p>
+								</div>							
+							</div>
+							<div class="chat-content">
+								<p class="content-text">
+									I change my service from this 4Mb plan to their much cheaper 8Mb plan, my speed will dramatically decrease.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>				
+				<section class="dialog-box">
+					<div class="dialog-info">
+						<p class="chat-name">Bessie Berry</p>
+						<div class="tools">
+							<i class="chat-icon tool-icon1"></i>
+							<i class="chat-icon tool-icon2"></i>
+							<i class="chat-icon tool-icon3"></i>
+						</div>
+						<p class="chat-one-of-text">1 of 28</p>
+						<div class="arrow">
+							<i class="chat-icon arrow-left"></i>
+							<i class="chat-icon arrow-right"></i>
+						</div>
+					</div>
+					<div class="main-dialog">
+						<div class="mes-content">
+							<div class="mes">
+								<img class="avatar avatar1" />
+								<div class="user-info">
+									<span class="user-name">Bessie Berry</span>
+									<span class="mes-time">8:31 AM</span>
+								</div>
+								<p class="mes-text">
+									Hi guys Ive got the O2 package and have really slow internet. A speed check online said i can get 3mbps but it seems more like 0.5 these days, just freezing and taking ages to open pages and open audio files for example. I have decided to switch to the UPC package which offers 10mbps but do you think i will get it?
+								</p>
+							</div>
+							<div class="mes">
+								<img class="avatar avatar8" />
+								<div class="user-info">
+									<span class="user-name">Jordan Jackson</span>
+									<span class="mes-time">8:31 AM</span>
+								</div>								
+								<p class="mes-text">
+									 I have internet for 9 month and nevere could benefit from the full capacity of 5Mbit/s as it is filtered by O2 when it detect traffic on public p2p sharing in my situation all my internet speed slows to 512Kbit/s. I never had 400KB/s on when downloading from p2p public servers like torrent emule etc. I downoad with 500KB/s from private trakers instead. So conlcusion O2 block trafic on p2p connections. I have made hundreds of test in Italy and Sweden and Romania with the same file to doanload with the same setting and same antivirus and just needed to open ports in firewall and forward same ports and the speed was at full capacity in 1 minute. here in 9 month never had this luck.
+								</p>
+							</div>
+						</div>
+						<!--分割线-->
+						<div class="dialog-divider">
+							  <span class="line"></span>							
+							  <span class="divider-text">Tuesday</span>							
+							  <span class="line"></span>							
+						</div>
+						<div class="mes-content">
+							<div class="mes">
+								<img class="avatar avatar1" />
+								<div class="user-info">
+									<span class="user-name">Bessie Berry</span>
+									<span class="mes-time">8:31 AM</span>
+								</div>
+								<p class="mes-text">
+									Funny comparison. so would the proper antivirus not slow down the internet as much or do you mean a freebie doenst protect the computer from viruses?
+								</p>
+							</div>
+							<div class="mes">
+								<img class="avatar avatar8" />
+								<div class="user-info">
+									<span class="user-name">Jordan Jackson</span>
+									<span class="mes-time">8:31 AM</span>
+								</div>								
+								<p class="mes-text">
+									I pay for the 4Mb/sec down, 512 Kb/sec up service from O2, and haven't had any problems. In fact, it's relatively quick, and stable. It's not perfect, but I really don't have issues, as long as I keep track of what I'm doing on it. I max out at about 3 Mb/sec down, and 350 Kb/sec up. Probably because of a noisy telephone line, not because I'm being throttled. When my uploads go over 25 KB/sec (note, bytes, not bits), my download speed suffers. This is expected, as downloads require upload bandwidth as well. 
+								</p>
+								<div class="photos">
+									<img class="photo photo1" />
+									<img class="photo photo2"  />
+									<i class="add-photo"></i>
+								</div>
+							</div>
+						</div>
+						<!--分割线New Message-->
+						<div class="dialog-divider">
+							<span class="line new-line"></span>							
+							<span class="divider-text new-text">New Message</span>							
+							<span class="line new-line"></span>							
+						</div>
+						<div class="mes-content">
+							<div class="mes">
+								<img class="avatar avatar1" />
+								<div class="user-info">
+									<span class="user-name">Bessie Berry</span>
+									<span class="mes-time">8:31 AM</span>
+								</div>
+								<p class="mes-text">
+									I pay for the 4Mb/sec down, 512 Kb/sec up service from O2. In fact, it's relatively quick, and stable. It's not perfect, but I really don't have issues, as long as I keep track of what I'm doing on it. 
+								</p>
+							</div>
+							<div class="add-mes">
+								<i class="add-mes-icon"></i>
+								<input type="text" class="add-input" value="Well, kinda both :) but more of that second option, i`ve seen many systems infected and crawling with"/>
+							</div>
+						</div>
+					</div>
+				</section>
+			</article>
+		</div>
+	</body>
+</html>
