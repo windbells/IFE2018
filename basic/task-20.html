@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第二十到第二十一天：让你和页面对话</title>
+		<style>
+	        select {
+	            display: none;
+	        }
+	        
+	        #company-select {
+	        	margin-left: 85px;
+	        }
+	        
+	        .palette {
+	            margin: 0;
+	            padding: 0;
+	            list-style: none;
+	        }
+	        
+	        .palette li {
+	            width: 40px;
+	            height: 40px;
+	            border: 1px solid #000;
+	            cursor: pointer;
+	        }
+	         #img-box {
+		      width: 480px;
+		      height: 480px;
+		      background-image: url(http://ife.baidu.com/2016/static/img/erik_ce204002.jpg);
+		      background-size: 100% auto;
+		    }
+	    </style>
+	</head>
+	<body>
+		<!--编程1-->
+		<p>编程1</p>
+		<input id="name" type="text" onkeydown="checkPress()" />    
+		<button id="submit-btn">Submit</button>		
+		<script>
+			var inputName = document.querySelector("#name");
+			var submit = document.querySelector("#submit-btn");
+			submit.addEventListener("click", function() {
+				console.log(inputName.value);
+			});
+			function checkPress() {
+				var keyCode = event.keyCode;
+				if (keyCode == 13)
+					console.log(inputName.value);
+				else if (keyCode == 27) 
+					inputName.value = "";
+			}
+		</script>
+		
+		<!--编程2-->
+		<p>编程2：用 JavaScript 操作 DOM 样式</p>
+		<label>
+	        <input id="school" name="status" type="radio">
+	        School
+	    </label>
+	    <label>
+	        <input id="company" name="status" type="radio">
+	        Company
+	    </label>
+	
+	    <select id="school-select">        
+	        <option>北京邮电大学</option>
+	        <option>黑龙江大学</option>
+	        <option>华中科技大学</option>
+	    </select>
+	
+	    <select id="company-select">        
+	        <option>百度</option>
+	        <option>爱奇艺</option>        
+	    </select>
+	    <script>
+	    	var school = document.querySelector("#school");
+	    	var company = document.querySelector("#company");
+	    	var schoolSel = document.querySelector("#school-select");
+	    	var companySel = document.querySelector("#company-select");
+	    	school.addEventListener("click", function() {
+	    		schoolSel.style.display = "block";
+	    		companySel.style.display = "none";
+	    	});
+	    	company.addEventListener("click", function() {
+	    		schoolSel.style.display = "none";
+	    		companySel.style.display = "block";
+	    	});
+	    </script>
+	    
+	    <!--编程3-->
+	    <p>编程3：JavaScript 的事件机制</p>
+	    <ul class="palette">
+	        <li style="background-color:crimson"></li>
+	        <li style="background-color:bisque"></li>
+	        <li style="background-color:blueviolet"></li>
+	        <li style="background-color:coral"></li>
+	        <li style="background-color:chartreuse"></li>
+	        <li style="background-color:darkolivegreen"></li>
+	        <li style="background-color:cyan"></li>
+	        <li style="background-color:#194738"></li>        
+	    </ul>	
+	    <p class="color-picker"></p>
+	     <script>
+	        var list = document.querySelectorAll("li");
+	        var ul = document.querySelector("ul");
+	        var p = document.querySelector(".color-picker");
+	        ul.onclick = function(ev) {
+	        	var ev = ev || window.event;
+			　　　var target = ev.target || ev.srcElement;
+			　　　if(target.nodeName.toLowerCase() == 'li'){
+		            var c = target.style.backgroundColor;	                
+		            p.innerHTML = c;
+		            p.style.color = c;	
+	        	}
+			}
+	    </script>
+	    
+	    <!--编程4：实现淡入淡出效果-->
+	    <p>编程4</p>
+	    <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+		<button id="fade-btn">淡出</button>
+		<script>
+			var fadeObj = document.querySelector("#fade-obj");
+			var fadeBtn = document.querySelector("#fade-btn");
+			var flag = true,  //判读是淡入还是淡出
+				num = 10,
+				fadeIn, 
+				fadeOut;
+			fadeBtn.onclick = function() {
+				fade();
+			}
+			function fade() {
+				fadeIn = setInterval(function() {
+					fadeBtn.disabled = true;
+					if (flag) {
+						num--;
+					}						
+					else {
+						num ++;
+					}
+					fadeObj.style.opacity = num / 10;
+					if (num <=0 || num >= 10) {
+						clearInterval(fadeIn);
+						fadeBtn.disabled = false;
+						fadeBtn.innerHTML = flag ?"淡入":"淡出";
+						flag = !flag;
+					}
+				}, 100);
+			}
+		</script>
+		
+		<!--编程5：学习来实现一个帧动画-->
+		<p>编程5</p>
+		<div id="img-box"></div>
+		<button id="img-btn">点击出现动画</button>
+		<script>
+			var imgBox = document.querySelector("#img-box");
+			var imgBtn = document.querySelector("#img-btn");
+			var imgHeight = 0,
+				positionY;
+			imgBtn.onclick = function() {
+				changePosition();
+			}
+			function changePosition() {
+				positionY = setInterval(function() {
+					if (imgHeight < 8160)
+						imgHeight += 480;
+					imgBox.style.backgroundPositionY = imgHeight + "px";
+					if (imgHeight >= 8160) {
+						clearInterval(positionY);
+						imgHeight = 0;
+					}
+				}, 100);
+			}
+		</script>
+</html>
