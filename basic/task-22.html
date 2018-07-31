@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第二十二天到第二十四天：JavaScript里面的居民们</title>
+	</head>
+	<body>
+		
+		<!--编程1-->
+		<div id="box1">
+		    <label>Number A:<input id="radio1-a" type="radio" name="math1-obj" value="a"></label><input id="num1-a" type="text">
+		    <label>Number B:<input id="radio1-b" type="radio" name="math1-obj" value="b"></label><input id="num1-b" type="text">
+		</div>
+		<div id="handle1-box">
+		    <button data-index="0">判断当前选中的输入框输入内容是否为数字</button>
+		    <button data-index="1">把 A 四舍五入为 B 个小数位数的数字</button>
+		    <button data-index="2">当前选中数字的绝对值</button>
+		    <button data-index="3">对当前选中的数字进行上舍入</button>
+		    <button data-index="4">对当前选中的数字进行下舍入</button>
+		    <button data-index="5">把当前选中的数字四舍五入为最接近的整数</button>
+		    <button data-index="6">返回 A 和 B 中的最高值</button>
+		    <button data-index="7">返回 A 和 B 中的最低值</button>        
+		</div>
+		<p id="result1"></p>
+		<script>
+			var numBtnList = document.querySelector("#handle1-box");
+			var result1 = document.querySelector("#result1");
+			
+			//判断当前输入是否为数字
+			function isNum(num) {
+				if (Number(num) || num === 0) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			
+			//采用事件处理机制
+			numBtnList.onclick = function(ev) {
+	        	var ev = ev || window.event;
+			　　　var target = ev.target || ev.srcElement;
+			　　　if(target.nodeName.toLowerCase() == 'button'){
+			        var index1 = target.dataset.index;	
+			        var numA1 = Number(document.querySelector("#num1-a").value); //获取第一个输入框的值
+					var numB1 = Number(document.querySelector("#num1-b").value); //获取第二个输入框的值
+					var radio1 = document.querySelector("#box1 input[type = 'radio']:checked");	//获取选中的单选按钮 
+					if (/[02345]/.test(index1)) {
+						// 判断有选中要求的按钮是否单选按钮是否按下
+						if (!radio1) {
+				          	result1.innerHTML = "您没有选中输入框";
+				        }
+						else {
+							//判断选择的是哪个单选框
+							if (radio1.value === "a")
+					          	var value = numA1;
+					        else 
+					        	var value = numB1;
+							switch(index1) {
+					            case "0":
+					            	result1.innerHTML = isNum(value) ?"您输入的是数字":"您输入的不是数字"; 
+					            	break;
+					            case "2":
+					            	result1.innerHTML = "操作结果为：" + Math.abs(value);
+					            	break;
+					            case "3":
+					            	result1.innerHTML = "操作结果为：" + Math.ceil(value);
+					            	break;
+					            case "4":
+					            	result1.innerHTML = "操作结果为：" + Math.floor(value);
+					            	break;
+					            case "5":
+					            	result1.innerHTML = "操作结果为：" + Math.round(value);
+					            	break;
+							}
+						}         			
+				     }
+					else {
+						//判断输入的两个数是否都为数字
+						if (isNum(numA1) && isNum(numB1)) {
+							switch(index1) {
+								case "1":
+									result1.innerHTML = "操作结果为：" + numA1.toFixed(numB1);
+									break;
+								case "6":
+									result1.innerHTML = "操作结果为：" + Math.max(numA1, numB1);
+									break;
+								case "7":
+									result1.innerHTML = "操作结果为：" + Math.min(numA1, numB1);
+									break;
+							}
+						}
+						else {
+							result1.innerHTML = "进行该操作的时候，输入的A和B都必须为数字";
+						}
+					}
+	        	}
+			}
+		</script>
+		
+		<!--编程2-->
+		<div id="box2" style="overflow:auto">
+		    <label>String A:
+		        <input id="radio2-a" type="radio" checked="true" name="str-obj" value="a">
+		    </label>
+		    <textarea id="str2-a" style="height: 20px;line-height: 20px;overflow: hidden;"></textarea>
+		    <label>String B:
+		        <input id="radio2-b" type="radio" name="str-obj" value="b">
+		    </label>
+		    <textarea id="str2-b" style="height: 20px;line-height: 20px;overflow: hidden;"></textarea>        
+		    <label>Num A：<input id="num2-a" type="number" value="0"></label>
+		    <label>Num B：<input id="num2-b" type="number" value="1"></label>
+		</div>
+		<div id="handle2-box">
+		    <button data-index="0">获取当前选中输入的内容长度</button>
+		    <button data-index="1">当前选中输入中的第3个字符</button>
+		    <button data-index="2">把两个输入框的文字连接在一起输出（concat）</button>
+		    <button data-index="3">输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+		    <button data-index="4">输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+		    <button data-index="5">使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+		    <button data-index="6">当前选中输入框的行数</button>
+		    <button data-index="7">使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+		    <button data-index="8">把所选输入框中的内容全部转为大写</button>
+		    <button data-index="9">把所选输入框中的内容全部转为小写</button>
+		    <button data-index="10">把所选输入框中内容的半角空格全部去除</button>
+		    <button data-index="11">把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+		</div>
+		<p id="result2"></p>
+		<script>
+			var strBtnList = document.querySelector("#handle2-box");
+			var result2 = document.querySelector("#result2");
+			strBtnList.onclick = function(ev) {
+				var ev = ev || window.event;
+				var target = ev.target || ev.srcElement;
+				if (target.nodeName.toLowerCase() === "button") {
+					var index2 = target.dataset.index;
+					var strA2Box = document.querySelector("#str2-a");
+					var strB2Box = document.querySelector("#str2-b");
+					var strA2 = strA2Box.value;
+					var strB2 = strB2Box.value;
+					var numA2 = Number(document.querySelector("#num2-a").value);
+					var numB2 = Number(document.querySelector("#num2-b").value);
+					var radio2 = document.querySelector("#box2 input[type=radio]:checked");
+					if (/[234]/.test(index2)) {
+						switch(index2) {
+							case "2":
+								result2.innerHTML = "字符串连接：" + (strA2.concat(strB2) || "字符串为空");
+								break;
+							case "3":
+								result2.innerHTML = "A中第一次出现的位置：" + strA2.indexOf(strB2);
+								break;
+							case "4":
+								result2.innerHTML = "B中最后一次出现的位置：" + strB2.lastIndexOf(strA2);
+								break;
+						}						
+					}
+					//当前选择按钮的操作
+					else {
+						//判断单选框是否被选中
+						if (!radio2) {
+							result2.innerHTML = "您没有选中输入框";
+						}
+						else {
+							//判断选择的是哪个单选框
+							var valueBox = (radio2.value === "a")?strA2Box:strB2Box;
+					        var value = valueBox.value; 
+					        //判断当前输入的字符串是否为空
+					        if (value.length != 0) {
+					        	switch(index2) {
+									case "0":
+										result2.innerHTML = "当前选择内容的长度为：" + value.length;
+										break;
+									case "1":
+										result2.innerHTML = (value.length < 3)? "当前输入内容不足3个字符":value[2];
+										break;
+									case "5":
+										if (isNum(numA2) && isNum(numB2)) 
+											result2.innerHTML = "经过slice处理后的字符串为：" + value.slice(numA2, numB2);
+										else
+											result2.innerHTML = "您输入的起始位置不对";
+										break;
+									case "6":
+										console.log(valueBox.scrollHeight);
+										result2.innerHTML = Math.floor(valueBox.scrollHeight / 20); //容器的高度除以行高再向下取整即为行数
+										break;
+									case "7":
+										if (isNum(numB2) && numB2 > 0) {
+											result2.innerHTML = value.substr(numA2, numB2);
+										}
+										else {
+											result2.innerHTML = "进行该操作的时候输入的num-b，即长度必须大于0，否则字符串为空";
+										}
+										break;
+									case "8":
+										result2.innerHTML = "转为大写为：" + value.toUpperCase();
+										break;
+									case "9":
+										result2.innerHTML = "转为大写为：" + value.toLowerCase();
+										break;
+									case "10":
+										result2.innerHTML = "去除半角空格后的字符串为：" + value.replace(/\u0020/g, '');
+										break;
+									case "11":
+										var result2Html = (radio2.value === "a")?strA2.replace(strA2, strB2):strB2.replace(strB2, strA2)
+										result2.innerHTML = "替换后字符串为：" + result2Html;
+										break;
+								}
+					        }
+							else {
+								result2.innerHTML = "您没有输入字符串";
+							}
+						}
+					}
+				}
+			}
+		</script>
+		
+		<p>编程3和4结果请在控制台中查看</p>
+		
+		<!--编程3-->
+		<script>
+		/*
+		实现一个字符串头尾去除空格的函数
+		注意需要去除的空格，包括全角、半角空格
+		暂时不需要学习和使用正则表达式的方式
+		*/
+		function diyTrim(str) {
+		    var result = "";
+		    var start = 0; //字符串开头位置
+		    var end = 0;   //字符串结束位置
+		    for (var i=0;i<str.length;i++) {
+		    	if (str[i] !==" " && str[i] !=="　") {
+		    		start = i;
+		    		break;
+		    	}
+		    }
+		    for (var j=str.length-1;j>=0;j--) {
+		    	if (str[j] !==" " && str[j] !=="　") {
+		    		end = j;
+		    		break;
+		    	}
+		    }
+		    result += "去除空格结果为：" + str.slice(i, j+1);
+		    return result
+		}
+		
+		// 测试用例
+		console.log(diyTrim(' a f b    ')); // ->a f b
+		console.log(diyTrim('    ffdaf    ')); // ->ffdaf
+		console.log(diyTrim('1    ')); // ->1
+		console.log(diyTrim('　　f')); // ->f
+		console.log(diyTrim('  　  a f b 　　 ')); // ->a f b
+		console.log(diyTrim(' ')); // ->
+		console.log(diyTrim('　')); // ->
+		console.log(diyTrim('')); // ->
+		
+		/*
+		去掉字符串str中，连续重复的地方
+		*/
+		function removeRepetition(str) {
+		    var result = "";
+		    var len = str.length; //字符串原长，因为后续字符串的长度会发生变化
+			for (var i=0;i<len;i++) {
+				if (str[0] == str[1]) {
+					str = str.slice(1);
+				}
+				else {
+					result += str[0];
+					str = str.slice(1);
+				}
+			}	
+		    return "去除重复的字符串：" + result;
+		}
+		
+		// 测试用例
+		console.log(removeRepetition("aaa")); // ->a
+		console.log(removeRepetition("abbba")); // ->aba
+		console.log(removeRepetition("aabbaabb")); // ->abab
+		console.log(removeRepetition("")); // ->
+		console.log(removeRepetition("abc")); // ->abc
+		</script>
+		
+		<!--编程4-->
+		<script>
+			var tree = {
+			    "id": 0,
+			    "name": "root",
+			    "left": {
+			        "id": 1,
+			        "name": "Simon",
+			        "left": {
+			            "id": 3,
+			            "name": "Carl",
+			            "left": {
+			                "id": 7,
+			                "name": "Lee",
+			                "left": {
+			                    "id": 11,
+			                    "name": "Fate"
+			                }
+			            },
+			            "right": {
+			                "id": 8,
+			                "name": "Annie",
+			                "left": {
+			                    "id": 12,
+			                    "name": "Saber"
+			                }
+			            }
+			        },
+			        "right": {
+			            "id": 4,
+			            "name": "Tony",
+			            "left": {
+			                "id": 9,
+			                "name": "Candy"
+			            }
+			        }
+			    },
+			    "right": {
+			        "id": 2,
+			        "name": "right",
+			        "left": {
+			            "id": 5,
+			            "name": "Carl",
+			        },
+			        "right": {
+			            "id": 6,
+			            "name": "Carl",
+			            "right": {
+			                "id": 10,
+			                "name": "Kai"
+			            }        
+			        }
+			    }
+			}
+			
+			// 假设id和name均不会重复，根据输入name找到对应的id
+			function findIdByName(name) {
+				var find = function(obj) {
+					if (!obj)
+						return false;
+					else {
+						if (obj.name === name) 
+							return obj.id;
+						else {
+							return find(obj.left) || find(obj.right);
+						}	
+					}
+				};
+				return find(tree);
+			}	
+			//调用根据name查找id函数
+			console.log("根据名字Fate找到的id为：" + findIdByName("Fate"));
+			
+			// 假设id和name均不会重复，根据输入id找到对应的name
+			function findNameById(id) {
+				var find = function(obj) {
+					if (!obj)
+						return false;
+					else {
+						if (obj.id == id) 
+							return obj.name;
+						else {
+							return find(obj.left) || find(obj.right);
+						}	
+					}
+				};
+				return find(tree);
+			}
+			//调用根据id查看name函数
+			console.log("根据id11找到的名字为：" + findNameById("11"));
+			
+			// 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+			console.log("前序遍历结果如下：")
+			function getListWithDLR() {
+				var print = function(obj) {
+					if(obj) {
+						console.log(obj.name);
+						print(obj.left);
+						print(obj.right);
+					}
+				};
+				print(tree);
+			}
+			//调用前序遍历函数
+			getListWithDLR();
+			
+			
+			// 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+			console.log("中序遍历结果如下：");
+			function getListWithLDR() {
+				var print = function(obj) {
+					if(obj) {
+						print(obj.left);
+						console.log(obj.name);
+						print(obj.right);
+					}
+				};
+				print(tree);
+			}
+			//调用中序遍历函数
+			getListWithLDR();
+			
+			// 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+			console.log("后序遍历结果如下：");
+			function getListWithLRD() {
+				var print = function(obj) {
+					if(obj) {
+						print(obj.left);
+						print(obj.right);
+						console.log(obj.name);
+					}
+				};
+				print(tree);
+			}
+			//调用后序遍历函数
+			getListWithLRD();
+		</script>
+		
+		<!--编程5-->
+		<p>编程5：队头在最右侧，中间用 -> 连接（练习使用数组的join方法）</p>
+		<input id="queue-input5" type="text">
+		<p id="queue-cont5">队列内容：apple-&gt;pear</p>    
+		<div id="queue-box5">
+			<button id="in-btn5">入队</button>
+			<button id="out-btn5">出队</button>
+			<button id="font-btn5">打印队头元素内容</button>
+			<button id="empty-btn5">判断队列是否为空</button>
+		</div>
+		<p id="tip-text5"></p>
+		
+		<script>		
+			var queue5 = ["apple", "pear"];	
+			var queueBox5 = document.querySelector("#queue-box5");
+			var queueCont5 = document.querySelector("#queue-cont5");
+			var tip5 = document.querySelector("#tip-text5");
+			queueBox5.onclick = function(ev) {
+				var ev = ev || window.event;
+				var target = ev.target || ev.srcElement;
+				var queueInput5 = document.querySelector("#queue-input5").value;
+				if(target.nodeName.toLowerCase() === "button") {
+					var id = target.id;
+					switch(id) {
+						case "in-btn5":
+							if(!queueInput5) {
+								tip5.innerHTML = "您输入的字符串为空";
+							}
+							else {
+								queue5.unshift(queueInput5);
+							}
+							break;
+						case "out-btn5":
+							queue5.pop();
+							break;
+						case "font-btn5":
+							var index = queue5.length-1 || 0;
+							tip5.innerHTML = "队头内容为：" + (queue5[index]||"无");
+							break;
+						case "empty-btn5":
+							var isNull = (queue5 === undefined || queue5.length == 0)?"是":"否";
+							tip5.innerHTML = "队列是否为空?" + isNull;	
+							break;
+					}
+					queueCont5.innerHTML = queue5.join("-&gt;");
+				}
+			};
+		</script>
+		
+		<!--编程6-->
+		<hr />
+		<p>编程6：队头在最左侧，中间用 <-连接（练习使用数组的join方法）</p>
+		<input id="queue-input6" type="text">
+		<p id="queue-cont6">队列内容：apple&lt;-pear</p>    
+		<div id="queue-box6">
+			<button id="in-btn6">入队</button>
+			<button id="out-btn6">出队</button>
+			<button id="font-btn6">打印队头元素内容</button>
+			<button id="empty-btn6">判断队列是否为空</button>
+		</div>
+		<p id="tip-text6"></p>
+		
+		<script>		
+			var queue6 = ["apple", "pear"];	
+			var queueBox6 = document.querySelector("#queue-box6");
+			var queueCont6 = document.querySelector("#queue-cont6");
+			var tip6 = document.querySelector("#tip-text6");
+			queueBox6.onclick = function(ev) {
+				var ev = ev || window.event;
+				var target = ev.target || ev.srcElement;
+				var queueInput6 = document.querySelector("#queue-input6").value;
+				if(target.nodeName.toLowerCase() === "button") {
+					var id = target.id;
+					switch(id) {
+						case "in-btn6":
+							if(!queueInput6) {
+								tip6.innerHTML = "您输入的字符串为空";
+							}
+							else {
+								queue6.push(queueInput6);
+							}
+							break;
+						case "out-btn6":
+							queue6.shift();
+							break;
+						case "font-btn6":
+							tip6.innerHTML = "队头内容为：" + (queue6[0]||"无");
+							break;
+						case "empty-btn6":
+							var isNull = (queue6 === undefined || queue6.length == 0)?"是":"否";
+							tip6.innerHTML = "队列是否为空?" + isNull;	
+							break;
+					}
+					queueCont6.innerHTML = queue6.join("&lt;-");
+				}
+			};
+		</script>
+		
+		<!--编程7-->
+		<hr />
+		<p>编程7：栈顶在最右侧，中间用 -> 连接（练习使用数组的join方法）</p>
+		<input id="stack-input7" type="text">
+		<p id="stack-cont7">栈内容：apple-gt;pear</p>    
+		<div id="stack-box7">
+			<button id="push-btn7">进栈</button>
+			<button id="pop-btn7">退栈</button>
+			<button id="font-btn7">打印栈顶元素内容</button>
+			<button id="empty-btn7">判断栈是否为空</button>
+		</div>
+		<p id="tip-text7"></p>
+		
+		<script>		
+			var stack7 = ["apple", "pear"];	
+			var stackBox7 = document.querySelector("#stack-box7");
+			var stackCont7 = document.querySelector("#stack-cont7");
+			var tip7 = document.querySelector("#tip-text7");
+			stackBox7.onclick = function(ev) {
+				var ev = ev || window.event;
+				var target = ev.target || ev.srcElement;
+				var stackInput7 = document.querySelector("#stack-input7").value;
+				if(target.nodeName.toLowerCase() === "button") {
+					var id = target.id;
+					switch(id) {
+						case "push-btn7":
+							if(!stackInput7) {
+								tip7.innerHTML = "您输入的字符串为空";
+							}
+							else {
+								stack7.push(stackInput7);
+							}
+							break;
+						case "pop-btn7":
+							stack7.pop();
+							break;
+						case "font-btn7":
+							var index = stack7.length-1 || 0;
+							tip7.innerHTML = "栈顶内容为：" + (stack7[index]||"无");
+							break;
+						case "empty-btn7":
+							var isNull = (stack7 === undefined || stack7.length == 0)?"是":"否";
+							tip7.innerHTML = "栈是否为空?" + isNull;	
+							break;
+					}
+					stackCont7.innerHTML = stack7.join("-&gt;");
+				}
+			};
+		</script>
+		
+		<!--编程8-->
+		<hr />
+		<p>编程8：栈顶在最左侧，中间用 -< 连接（练习使用数组的join方法）</p>
+		<input id="stack-input8" type="text">
+		<p id="stack-cont8">栈内容：apple-gt;pear</p>    
+		<div id="stack-box8">
+			<button id="push-btn8">进栈</button>
+			<button id="pop-btn8">退栈</button>
+			<button id="font-btn8">打印栈顶元素内容</button>
+			<button id="empty-btn8">判断栈是否为空</button>
+		</div>
+		<p id="tip-text8"></p>
+		
+		<script>		
+			var stack8 = ["apple", "pear"];	
+			var stackBox8 = document.querySelector("#stack-box8");
+			var stackCont8 = document.querySelector("#stack-cont8");
+			var tip8 = document.querySelector("#tip-text8");
+			stackBox8.onclick = function(ev) {
+				var ev = ev || window.event;
+				var target = ev.target || ev.srcElement;
+				var stackInput8 = document.querySelector("#stack-input8").value;
+				if(target.nodeName.toLowerCase() === "button") {
+					var id = target.id;
+					switch(id) {
+						case "push-btn8":
+							if(!stackInput8) {
+								tip8.innerHTML = "您输入的字符串为空";
+							}
+							else {
+								stack8.unshift(stackInput8);
+							}
+							break;
+						case "pop-btn8":
+							stack8.shift();
+							break;
+						case "font-btn8":
+							tip8.innerHTML = "栈顶内容为：" + (stack8[0]||"无");
+							break;
+						case "empty-btn8":
+							var isNull = (stack8 === undefined || stack8.length == 0)?"是":"否";
+							tip8.innerHTML = "栈是否为空?" + isNull;	
+							break;
+					}
+					stackCont8.innerHTML = stack8.join("&lt;-");
+				}
+			};
+		</script>
+		
+		<!--编程9-->
+		<p>编程9：排序结果请在控制台中查看</p>
+		<script>
+			//数字升序排列
+			function compareNumbers(a, b) {
+			  return a - b;
+			}
+			//数字逆序排列
+			function compareNumbersReverse(a, b) {
+			  return b - a;
+			}
+			//字符串逆序排序
+			function compareStringReverse(a, b) {
+				 if (a < b ) {           // 按某种排序标准进行比较, a大于 b
+				    return 1;
+				  }
+				  if (a > b ) {
+				    return -1;
+				  }
+				  return 0;
+			}
+			//根据数组的第二个元素升序排列
+			function sortBySec(a, b) {
+				return b[1] - a[1];
+			}
+			//根据value的大小升序排列
+			function sortByValue(a, b) {
+				return a.value - b.value;
+			}
+			
+			var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+			var arr2 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+			var arr3 = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
+			var arr4 = [
+			    {
+			        id: 1,
+			        name: 'candy',
+			        value: 40
+			    }, {
+			        id: 2,
+			        name: 'Simon',
+			        value: 50
+			    }, {
+			        id: 3,
+			        name: 'Tony',
+			        value: 45
+			    }, {
+			        id: 4,
+			        name: 'Annie',
+			        value: 60
+			    }
+			];
+			//JSON.stringify() 方法是将一个JavaScript值(对象或者数组)转换为一个 JSON字符串
+			console.log("数组：[43, 54, 4, -4, 84, 100, 58, 27, 140]升序排列结果为：" + JSON.stringify(arr1.sort(compareNumbers))); 
+			console.log("数组：[43, 54, 4, -4, 84, 100, 58, 27, 140]逆序排列结果为：" + JSON.stringify(arr1.sort(compareNumbersReverse)));
+			console.log("数组：['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane']升序排列结果为：" + JSON.stringify(arr2.sort()));
+			console.log("数组：['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane']逆序排列结果为：" + JSON.stringify(arr2.sort(compareStringReverse)));
+			arr3.sort(sortBySec);
+			console.log("数组：[[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]]按照每个元素中第二个数从大到小的顺序进行排序输出：" + JSON.stringify(arr3));
+			console.log("数组：" + JSON.stringify(arr4) + "将上面数组分别按元素对象的value值从小到大进行排序后输出:");
+			console.log(JSON.stringify(arr4.sort(sortByValue)));
+		</script>
+		
+		<!--编程10：学习通用的数据用不同的数据结构进行存储，以及相互的转换-->
+	</body>
+</html>
