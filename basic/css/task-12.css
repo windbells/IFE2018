@@ -628,11 +628,11 @@ header {
 .line {
 	flex-grow: 1;
 	height: 1px;
-  background-color: #e6e9ec;
+  background-color: #e6e9ec; /*线的颜色*/
 }
 
 .divider-text {
-	margin: 0 5px;
+	margin: 0 5px; /*设置文字与线之间的间距*/
 	color: #7f8fa4;
 }
 
