@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第二十五天到第二十七天 倒数开始 滴答滴 滴答滴</title>
+	</head>
+	<body>
+		<!--编程1-->
+		<p>编程1：结果请看控制台</p>
+		<script>
+			function Go() {
+			    console.log("Go");
+			}
+			function GoSteps(n) {
+			   	if(n===undefined) { //1次，认为缺少参数时，默认参数为1
+			   		Go();
+			   		console.log("---------输出了Go------1次");
+			   	}
+			   	else {
+			   		if(n<0) { //负数和非数字
+			   			console.log("---------输出了Go------0次");
+			   			return false;
+			   		}
+			   		else {
+			   			var count = 0;
+			   			var num = Math.floor(n);
+			   			for(var i=0;i<num;i++) {
+			   				Go();
+			   				count++;
+			   			}
+			   			console.log("---------输出了Go------" + count + "次");
+			   		}
+			   	}
+			}
+			GoSteps(10); // Go 10次
+			GoSteps(1); // Go 1次
+			GoSteps(); // Go 1次，认为缺少参数时，默认参数为1
+			GoSteps(0);  // 0次
+			GoSteps(-1);  // 0次
+			GoSteps(1.4);  // Go 1次
+			GoSteps(1.6);  // Go 1次
+			GoSteps(-1);  // 0次
+			GoSteps(true);  // Go 1次
+			GoSteps(false);  // 0次
+			GoSteps("Test");  // 0次
+			GoSteps(NaN);  // 0次
+			GoSteps(null);  // 0次
+		</script>
+		
+		<!--编程2-->
+		<p>编程2：时间格式为 YYYY 年 MM 月 DD 日 星期 D HH:mm:ss</p>
+		<p id="clock1"></p>
+		<p id="clock2"></p>
+		<script>
+		var clock1 = document.querySelector("#clock1");
+		var clock2 = document.querySelector("#clock2");
+		    //来根据某个日期返回这一天是星期几（中文）
+			function getWeekdayCh(date) { 
+				var weekday = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];				
+				return weekday[date.getDay()];
+			}
+			
+//			来根据某个日期返回这一天是星期几（英文）
+			function getWeekdayEn(date) {
+				var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+				return weekday[date.getDay()];
+			}
+			
+			//把月、日、小时等出现个位数的情况前面补充0，补充为两位，比如1变为01
+			function checkTime(i) {
+				if(i<10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+			
+			//格式化小时
+			function checkHour(hour) {
+				var datetime = [];
+				if(hour > 12) {
+					datetime[0] = hour - 12;
+					datetime[1] = "PM";
+				}
+				else {
+					datetime[0] = hour;
+					datetime[1] = "AM";
+				}
+				return datetime;
+			}
+			
+			//日期格式化输出，格式1
+			function getTimeFormat1() {
+				var date = new Date(),
+				    year = date.getFullYear(),
+				    month = checkTime(date.getMonth()+1),
+				    day = checkTime(date.getDate()),
+				    weekday = getWeekdayCh(date),
+				    hour = checkTime(date.getHours()),
+				    minute = checkTime(date.getMinutes()),
+				    second = checkTime(date.getSeconds()),
+				    time = year + "年" + month + "月" + day + "日" + weekday + hour + ":" + minute + ":" + second;
+				return time;
+			}
+			
+			//日期格式化输出，格式2
+			function getTimeFormat2() {
+				var date = new Date(),
+				    year = date.getFullYear(),
+				    month = checkTime(date.getMonth()+1),
+				    day = checkTime(date.getDate()),
+				    weekday = getWeekdayEn(date), //英文格式时间
+				    datetime = checkHour(date.getHours()),
+				    hour = checkTime(datetime[0]),
+				    meridian = datetime[1],
+				    minute = checkTime(date.getMinutes()),
+				    second = checkTime(date.getSeconds()),
+				    time = year + "-" + month + "-" + day + " " + weekday + hour + ":" + minute + ":" + second + " " + meridian;
+				return time;
+			}
+			
+			//创建日期的计时器,格式1
+			function startTimeFormat1() {
+				clock1.innerHTML = getTimeFormat1();
+				setTimeout("startTimeFormat1()",1000);
+			}
+			startTimeFormat1();
+			
+			function startTimeFormat2() {
+				clock2.innerHTML = getTimeFormat2();
+				setTimeout("startTimeFormat2()",1000);
+			}
+			startTimeFormat2();
+		</script>
+		
+		
+		<!--编程3-->
+		<div id="select-box">
+			<select id="year-select"></select>		
+			<select id="month-select"></select>		
+			<select id="day-select"></select>		
+			<select id="hour-select"></select>		
+			<select id="minute-select"></select>		
+			<select id="second-select"></select>
+		</div>			
+		<p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+		
+		<script>
+			var year = document.querySelector("#year-select"),
+				month = document.querySelector("#month-select"),
+				day = document.querySelector("#day-select"),
+				hour = document.querySelector("#hour-select"),
+				minute = document.querySelector("#minute-select"),
+				second = document.querySelector("#second-select"),
+				resultWarpper = document.querySelector("#result-wrapper"),
+				selectBox = document.querySelector("#select-box");
+			var timeout;
+			function addOption(start, end, element) {
+				for(var i=start;i<end;i++) {
+					var option = document.createElement("option");// 新建一个option对象
+					option.value = i;      // 设置option对象的值
+					option.innerHTML = i;  // 设置option对象的内容
+					element.appendChild(option); //添加到element的select对象
+				}
+			}
+				
+			function DateSelector(year, month, day, hour, minute, second) {
+				this.year = year;
+				this.month = month;
+				this.day = day;
+				this.hour = hour;
+				this.minute = minute;
+				this.second = second;
+				this.InitYearSelect(); //创建年的option选项
+				this.InitMonthSelect(); //创建月份的option选项
+				this.InitDaySelect(); //创建天的option选项
+				this.InitHourSelect(); //创建小时的option选项
+				this.InitMinuteSelect(); //创建分钟的option选项
+				this.InitSecondSelect();//创建秒的option选项
+				
+				this.year.Group = this;
+    			this.month.Group = this;
+				
+				// 给年份、月份下拉菜单添加处理onchange事件的函数
+			    if (window.document.all != null) { // IE
+			        this.year.attachEvent("onchange", DateSelector.Onchange);
+			        this.month.attachEvent("onchange", DateSelector.Onchange);
+			    }
+			    else { // Firefox		   
+			        this.year.addEventListener("change", DateSelector.Onchange, false);
+			        this.month.addEventListener("change", DateSelector.Onchange, false);
+			    }
+			}
+			
+			//初始化年份
+			DateSelector.prototype.InitYearSelect = function() {
+				addOption(2000, 2033, this.year);
+			};
+			
+			//初始化月份
+			DateSelector.prototype.InitMonthSelect = function() {
+				addOption(1, 13, this.month);
+			};
+			
+			// 根据年份与月份获取当月的天数
+			DateSelector.DaysInMonth = function (year, month) {
+			    var date = new Date(year, month, 0); //因为月份是从0开始的，日期从1开始，所以求的是输入月份的天数
+			    return date.getDate();
+			};
+			
+			//初始化天数
+			DateSelector.prototype.InitDaySelect = function() {
+				 // 获取当前的年份和月份
+    			var year = parseInt(this.year.value);
+    			var month = parseInt(this.month.value);
+    			// 获取当月的天数
+    			var daysInMonth = DateSelector.DaysInMonth(year, month);  
+    			// 清空原有的选项
+    			this.day.options.length = 0;
+    			addOption(1, daysInMonth + 1, this.day);
+			};
+			
+			// 处理年份和月份onchange事件的方法，它获取事件来源对象（即year或month）
+			// 并调用它的Group对象提供的InitDaySelect方法重新初始化天数
+			DateSelector.Onchange = function (e) {
+			    var selector = window.document.all != null ? e.srcElement : e.target;
+			    selector.Group.InitDaySelect();
+			};
+						
+			//初始化小时
+			DateSelector.prototype.InitHourSelect = function() {
+				addOption(1, 24, this.hour);
+			};
+			
+			//初始化分钟
+			DateSelector.prototype.InitMinuteSelect = function() {
+				addOption(1, 60, this.minute);
+			};
+			
+			//初始化秒
+			DateSelector.prototype.InitSecondSelect = function() {
+				addOption(1, 60, this.second);
+			};
+			
+			//计算时间差
+			function diffTime() {
+				var selectTimeRep = year.value+"/"+month.value+"/"+day.value+" "+hour.value+":"+minute.value+":"+second.value;
+				var select = new Date(selectTimeRep);
+				var now = new Date();
+				var diff = select.getTime() - now.getTime();  //时间差的毫秒数
+				var weekday = getWeekdayCh(select); //获得当前是星期几
+				var result = "现在距离";
+				var selectTimeCh = year.value+"年"+month.value+"月"+day.value+"日"+weekday+" "+hour.value+":"+minute.value+":"+second.value;
+				result += selectTimeCh;
+				if(diff<0) {
+					result += "已经过去";
+					diff = Math.abs(diff);
+				}
+				else
+					result += "还有";
+				var days = Math.floor(diff / (24 * 3600 * 1000));//计算出天数
+				var leave1 = diff % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
+				var hours = Math.floor(leave1 / (3600 * 1000));  //计算小时数
+				var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
+				var minutes = Math.floor(leave2 / (60*1000)); //计算分钟数
+				var leave3 = leave2 % (60 * 1000);      //计算分钟数后剩余的毫秒数
+				var seconds=Math.round(leave3 / 1000); //计算秒
+				result += days + "天" + hours + "小时" + minutes + "分" + seconds + "秒";
+				return result;
+			}
+			
+			//循环更新时间差
+			function startDiffTime() {
+				resultWarpper.innerHTML = diffTime();
+				var timeout = setTimeout("startDiffTime()",1000);
+			}
+			startDiffTime(); //开始循环更新时间差
+			
+			new DateSelector(year, month, day, hour, minute, second);
+			selectBox.onchange = function(ev) { //点击了select按钮改变内容
+				var ev = ev || window.event;
+			　　　var target = ev.target || ev.srcElement;
+			　　　if(target.nodeName.toLowerCase() == 'select') {
+					clearTimeout(timeout); //先清除旧的计时器
+					startDiffTime(); //当select改变的时候重新开始
+				}
+			}
+		</script>
+	</body>
+</html>
