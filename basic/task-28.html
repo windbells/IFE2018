@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第二十八天到第三十天 给爱的人发个邮件吧</title>
+		<style>
+			   .wrapper {
+			      margin: 20px;
+			    }
+			    
+			    #email-input {
+			      padding: 8px;
+			      width: 220px;
+			      height: 40px;
+			      border: 1px solid #d9d9d9;
+			      outline: none;
+			      box-sizing: border-box;
+			    }
+			    
+			    #email-sug-wrapper {
+			      margin-top: -1px;
+			      padding: 0;
+			      width: 220px;
+			      font-size: 14px;
+			      border: 1px solid #d9d9d9;
+			      color: #aaa;
+			      box-sizing: border-box;
+			    }
+			    
+			    #email-sug-wrapper li {
+			      padding: 8px;
+			      list-style: none;
+			      cursor: pointer;
+			      word-wrap: break-word;
+			    }
+			    
+			    #email-sug-wrapper .selectd {
+			      background-color: #ffc4ce;
+			    }
+			    
+			    #email-sug-wrapper li:hover {
+			      background-color: #bdddec;
+			    }
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+		    <input id="email-input" type="text">
+		    <ul id="email-sug-wrapper" class="email-sug"></ul>
+		</div>
+		
+		<script>
+			var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+			var inputBox = document.querySelector("#email-input");
+			var emailBox = document.querySelector("#email-sug-wrapper");
+			// 增加一个变量，用于存储当前选中的提示Li的序号
+			var nowSelectTipIndex = 0;
+			var tipList;
+        	// 页面加载时输入框获得焦点
+        	inputBox.focus();
+        	
+			 // 监听用户输入
+      		inputBox.addEventListener("input", function() {		
+			    var inputVal = getInput(); //获取用户输入
+        		tipList = generateTip(inputVal); //生成提示框中的提示内容
+        		addContent(tipList);  //将提示内容添加到email-sug-wrapper中
+			    hideOrShow(inputVal); //控制email-sug-wrapper的显示/隐藏状态
+      		});
+      		
+//    		拿到input输入框的输入内容trim后返回
+      		function getInput() {
+				if(!inputBox.value)
+					return "";
+				else
+					return inputBox.value.trim(); //拿到input输入框的输入内容trim后返回    
+			}
+      		
+      		// 生成提示框中的提示内容()
+			function generateTip(inputVal) {				
+				if(!inputVal)
+					return false;
+				var before="";
+            	var postfix; //后缀字符串为邮箱的域名
+            	var tipList = []; //提示框的li标签的HTML
+            	var index = inputVal.indexOf("@");
+			    if (index != -1) {
+			        before = inputVal.slice(0, index);
+			        postfix = inputVal.slice(index + 1, inputVal.length);
+			        var postfixMatch = matchPostfix(postfix);
+			        for(var i in postfixMatch) {
+			        	tipList.push(before + "@" + postfixMatch[i]);
+			        }
+			    }
+			    else {
+			    	before = inputVal;
+			    	for(var i in postfixList) {
+			        	tipList.push(before + "@" + postfixList[i]);
+			        }
+			    }	
+				 return tipList;  //返回生成的提示内容
+			}
+			
+//			匹配的邮箱后缀名列表
+			function matchPostfix(postfix) {
+		        if (!postfix) 
+		        	return postfixList;
+		        var result = [];
+		        // 遍历匹配符合要求的后缀
+		        for (var i=0;i<postfixList.length;i++) {
+		        	var index = postfixList[i].indexOf(postfix);
+		        	//说明输入的后缀匹配后缀字符串列表里面的值
+		        	if(index == 0) {		        		
+		           		result.push(postfixList[i]); 
+		          }
+		        }
+		        // 匹配不成功返回所有后缀
+		        if (!result.length) 
+		        	return postfixList;
+		        else
+		        	return result;
+			}
+		
+			//  将提示内容添加到email-sug-wrapper中
+        	function addContent(tiptList){
+        		var html = "";
+	            for(var i in tipList){
+	                var li = "<li>" + htmlEncode(tipList[i]) + "</li>";
+	                html += li;
+	            }
+	            emailBox.innerHTML = html;
+	            //将第1个Li的样式设置为被选样式
+	            var liList = document.querySelector("li");
+				liList.classList.add('selectd');
+			}
+			
+			
+//			控制email-sug-wrapper的显示/隐藏状态
+			function hideOrShow(inputVal) {
+			    if (!inputVal) {
+			       	isHide();
+			    } else {
+			        isShow();
+			    }
+			}
+			
+//			设置提示框为为隐藏
+			function isHide() {
+			    emailBox.style.display = "none";
+			}
+			
+//			设置提示框为显示
+			function isShow() {
+			    emailBox.style.display = "block";
+			}
+			
+			// 监听特殊3个键的键盘事件，这个事件可能就是inputDom的输入监听
+			inputBox.addEventListener("keydown", function(ev) { 
+				var ev = ev || window.event;
+				//Enter:13 ,上:38, 下:40,Esc:27
+				var keyCode = ev.keyCode;
+				if(keyCode == 27) {
+					ev.preventDefault();
+					inputBox.select(); // 按下Esc键(27) 全选输入框内容
+				}
+				else if (/^13|38|40$/.test(keyCode)) {
+					var liTextBox = document.querySelectorAll("li");
+          			ev.preventDefault();
+          			if(keyCode == 13) {
+				    	var content = liTextBox[nowSelectTipIndex].innerHTML || liTextBox[0].innerHTML;
+				    	inputBox.value = htmlDecode(content); //从当前提示框中选第  个Li，将其HTML内容解码后填到input中        				       	 
+				        isHide();
+				        inputBox.focus();
+				    }
+          			liTextBox[nowSelectTipIndex].classList.remove("selectd");
+				    if(keyCode == 38) {
+				        if(nowSelectTipIndex > 0) {
+				            nowSelectTipIndex -= 1;
+				        } 
+				        else {
+				            nowSelectTipIndex = postfixList.length - 1;
+				        }
+				    }
+				    if(keyCode == 40) {
+				        if(nowSelectTipIndex >= postfixList.length-1) {
+				            nowSelectTipIndex = 0;
+				        } 
+				        else {
+				            nowSelectTipIndex += 1;
+				        }
+				    }
+				    // 新选中项添加样式
+				    liTextBox[nowSelectTipIndex].classList.add("selectd");
+				}
+			});
+											
+			/*用浏览器内部转换器实现html转码*/
+	        function htmlEncode(html){
+	            //1.首先动态创建一个容器标签元素，如DIV
+	            var temp = document.createElement ("div");
+	            //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+	            (temp.textContent != undefined ) ? (temp.textContent = html) : (temp.innerText = html);
+	            //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+	            var output = temp.innerHTML;
+	            temp = null;
+	            return output;
+	        }
+	        
+	        /*用浏览器内部转换器实现html解码*/
+	        function htmlDecode(text){
+	            //1.首先动态创建一个容器标签元素，如DIV
+	            var temp = document.createElement("div");
+	            //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+	            temp.innerHTML = text;
+	            //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+	            var output = temp.innerText || temp.textContent;
+	            temp = null;
+	            return output;
+	        }
+			
+									
+//			监听鼠标点击
+      		emailBox.addEventListener('click', function(ev) {
+      			var ev = ev || window.event;
+			　　　var target = ev.target || ev.srcElement;
+			    if (target.nodeName.toLowerCase() === 'li') {
+				   inputBox.value = htmlDecode(target.innerHTML); //将用户输入内容解码后显示到input输入框中
+        			isHide(); //隐藏提示框
+        			inputBox.focus();
+				}    		      		
+			});     				
+			
+//      	重置选中状态
+			function resetState() { 
+			   if (nowSelectTipIndex != 0) {
+				    emailBox[nowSelectTipIndex].classList.remove("selectd");
+				    nowSelectTipIndex = 0;
+			    }
+			}
+						
+		</script>
+	</body>
+</html>
