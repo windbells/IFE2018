@@ -1,0 +1,103 @@
+<?xml version="1.0" standalone="no"?>
+
+        <!--这个练习的代码和报表页面无关，单独新开一个页面来实现，通过SVG实现如下需求-->
+
+<svg width="100%" height="100%" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <!--画一条线 -->
+    <line x1="0" y1="0" x2="100" y2="100"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+
+    <!--画一个矩形-->
+    <rect x="150" y="100" width="100" height="100"/>
+
+    <!--画一个圆形-->
+    <circle cx="350" cy="150" r="50" />
+
+    <!--显示一些文字-->
+    <text x="320" y="160" font-size="30" style="fill:white">SVG</text>
+
+    <!--画一朵花,圆堆叠形成-->
+    <!--中心圆 -->
+    <circle cx="500" cy="150" r="50"
+        style="fill: #FB9B60;"/>
+
+    <!--茎-->
+    <rect x="500" y="200" width="10" height="150"
+          style="fill: #11710F;"/>
+
+    <!--四个90度的点 -->
+    <circle cx="500" cy="90" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="440" cy="150" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="560" cy="150" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="500" cy="210" r="10"
+            style="fill: #FDF979;"/>
+
+    <!--左上角四分之一圆的点 -->
+    <circle cx="444.56" cy="127.03" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="457.57" cy="107.57" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="477.03" cy="94.56" r="10"
+            style="fill: #FDF979;"/>
+
+    <!--右上角四分之一圆的点 -->
+    <circle cx="555.43" cy="127.03" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="542.42" cy="107.57" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="522.96" cy="94.56" r="10"
+            style="fill: #FDF979;"/>
+
+    <!--右下角四分之一圆的点 -->
+    <circle cx="555.43" cy="172.96" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="542.42" cy="192.42" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="522.96" cy="205.43" r="10"
+            style="fill: #FDF979;"/>
+
+
+    <!--左下角四分之一圆的点 -->
+    <circle cx="444.56" cy="172.96" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="457.57" cy="192.42" r="10"
+            style="fill: #FDF979;"/>
+    <circle cx="477.03" cy="205.43" r="10"
+            style="fill: #FDF979;"/>
+
+    <!--向日葵的中间的种子-->
+    <line x1="453.80" y1="130.86" x2="546.19" y2="130.86"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="450" y1="150" x2="550" y2="150"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="464.64" y1="114.64" x2="535.35" y2="114.64"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="453.80" y1="169.14" x2="453.80" y2="169.14"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="453.80" y1="169.14" x2="546.19" y2="169.14"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="500" y1="100" x2="500" y2="200"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="464.65" y1="185.35" x2="535.35" y2="185.35"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="519.13" y1="103.80" x2="519.13" y2="196.19"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+    <line x1="480.86" y1="103.80" x2="480.86" y2="196.19"
+          style="stroke:rgb(99,99,99);stroke-width:2"/>
+
+    <!--叶子：svg的path是路径绘制,字母M后面的是绘图起点坐标,字母C是curveto选项,其后三个坐标分别是起始控制柄,终止控制柄,以及终点坐标。叶子轮廓代码是:-->
+    <path d="M510 280 C510 276 550 250 570 230 C570 235 530 250 510 280"
+          style="fill:#11710F;stroke:#11aa42;stroke-width:1px"/>
+
+
+    <!--画一颗小树-->
+    <ellipse cx="700" cy="150" rx="80" ry="100"
+             style="fill: #11aa42"/>
+    <polygon points="700,150 640,350 760,350"
+             style="fill:#79241F;stroke-width:1"/>
+</svg>
