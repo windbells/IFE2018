@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas小练习</title>
+</head>
+<body onload="draw();drawCloud()">
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <canvas id="canvas-clock" width="300" height="300"></canvas>
+    <canvas id="canvas-cloud" width="300" height="300"></canvas>
+ </body>
+
+<script>
+    function draw() {
+        var canvas = document.getElementById("canvas");
+        if (canvas.getContext) { //用来获得渲染上下文和它的绘画功能
+            var ctx = canvas.getContext("2d");
+
+            // 画一条线
+            ctx.beginPath();
+            ctx.moveTo(0, 0); //指定起始位置
+            ctx.lineTo(100, 100);
+            ctx.closePath();
+            ctx.stroke(); //通过线条来绘制图形轮廓。
+
+            // 画一个矩形
+            ctx.fillRect(110, 100, 100,100);
+
+            // 画一个圆形
+            ctx.beginPath();
+            ctx.arc(270, 150, 50, 0, 2*Math.PI, true); //画一个以（x,y）为圆心的以radius为半径的圆弧（圆），从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。
+            // 注意：arc()函数中的角度单位是弧度，不是度数。角度与弧度的js表达式:radians=(Math.PI/180)*degrees。
+            ctx.fill();
+
+            // 显示一些文字
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "#ffffff";
+            ctx.fillText("Canvas", 240, 150);
+
+
+        }
+    }
+
+
+
+    // 画一个小黄人时钟
+    var canvasClock = document.getElementById("canvas-clock");
+    if (canvasClock.getContext) {
+        var ctx = canvasClock.getContext("2d");
+    }
+    function drawClock() {
+        // ctx.clearRect(150, 150, 300, 300);
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        //转化为函数所需要的弧度
+        var h = (hour * 30 - 90 + minute / 2) * Math.PI / 180; //30度一小时，当分钟走的时候，时钟也要走一点点，角度为:30/60*当前分钟
+        var m = (minute * 6 - 90) * Math.PI / 180;  //6度一分钟
+        var s = (second * 6 - 90) * Math.PI / 180;　　//6度一秒　　　　
+        drawBg(ctx);
+        drawHour(h);
+        drawMinute(m);
+        drawSecond(s);
+        ctx.restore();
+    }
+
+    drawClock();
+    setInterval(function(){
+        clearTime();
+        drawClock();
+    },1000);
+
+    //绘制背景
+    function drawBg() {
+        ctx.beginPath();
+
+        //    画一个外面的大圆
+        ctx.moveTo(150, 150);
+        ctx.arc(150, 150, 150, 0, 2*Math.PI, true);
+        ctx.fillStyle = "#094873";
+        ctx.fill();
+        ctx.stroke();
+
+        //重新描绘画布，不然之后填充的颜色会把之前的全部覆盖
+        ctx.beginPath();
+        //画内部的小圆
+        ctx.arc(150, 150, 142, 0, 2*Math.PI, true);
+        ctx.fillStyle = "#F7FCF6";
+        ctx.fill();
+        ctx.stroke();
+
+        //    创建一个Image对象，存放小黄人
+        ctx.beginPath();
+        var image = new Image();
+        image.src = "img/Minions.jpg";
+        ctx.drawImage(image, 50, 50, 200, 200);
+
+        // 填充文字
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "#F5CC4E";
+        ctx.fillText("3",270,150);
+        ctx.fillText("6",145,280);
+        ctx.fillText("9",20,150);
+        ctx.fillText("12",140,40);
+    }
+
+    //利用画圆函数，把起始和终点设为同一角度，即可画出以圆心为起点的射线（指针）了
+    function drawHour(hour){
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.moveTo(150, 150);
+        ctx.arc(150, 150, 25, hour, hour);
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    function drawMinute(minute){
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = "#F3CA4C";
+        ctx.lineWidth = 3;
+        ctx.lineCap = "round";
+        ctx.moveTo(150, 150);
+        ctx.arc(150, 150, 40, minute, minute);
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    function drawSecond(second) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = "#1970A3";
+        ctx.lineWidth = 1;
+        ctx.lineCap = "round";
+        ctx.moveTo(150, 150);
+        ctx.arc(150, 150, 60, second, second);
+        ctx.stroke();
+        ctx.restore();
+
+    }
+
+    function clearTime(){
+        ctx.beginPath();
+        //画内部的小圆
+        ctx.moveTo(0,0);
+        ctx.arc(150, 150, 146, 0, 2*Math.PI, true);
+        ctx.fillStyle = "#F7FCF6";
+        ctx.fill();
+
+        //    创建一个Image对象，存放小黄人
+        ctx.beginPath();
+        var image = new Image();
+        image.src = "img/Minions.jpg";
+        ctx.drawImage(image, 50, 50, 200, 200);
+    }
+
+
+
+
+//    画一朵云
+    function drawCloud() {
+        var cloud = document.getElementById("canvas-cloud");
+        if (cloud.getContext) {
+            var ctx = cloud.getContext("2d");
+            ctx.beginPath();
+            ctx.lineWidth = 6;  //设置线的宽度
+            ctx.moveTo(150, 200); //开始点
+            ctx.bezierCurveTo(100,200,100,150,150,150);
+            ctx.bezierCurveTo(150,100,250,100,250,150);
+            ctx.bezierCurveTo(300,150,300,200,250,200);
+            ctx.lineCap="round";
+            ctx.lineTo(150,200);
+            ctx.stroke();
+
+        }
+
+    }
+
+</script>
+</html>
