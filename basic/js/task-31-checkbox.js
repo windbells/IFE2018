@@ -21,11 +21,6 @@ function createCheckBox(checkBox, data) {
             var inputList = document.querySelectorAll(selector);
             if (index == "all") { //如果是全选，做全选对应的逻辑
                 checkedAll(inputList);
-                // regionChecked = getCheckBox(regionCheckBox); //地区的选中复选框列表
-                // productChecked = getCheckBox(productCheckBox); //商品的选中复选框列表
-                // flag = judgeRegAndPro(); //判断商品和地区的选中个数
-                // // 渲染新的表格(根据select选项获取数据)
-                // createNewTable(flag, createData());
             }
             else {
                 var count = countSelect(inputList);
@@ -44,8 +39,17 @@ function createCheckBox(checkBox, data) {
             regionChecked = getCheckBox(regionCheckBox); //地区的选中复选框列表
             productChecked = getCheckBox(productCheckBox); //商品的选中复选框列表
             flag = judgeRegAndPro(); //判断商品和地区的选中个数
-            // 渲染新的表格(根据select选项获取数据)
-            createNewTable(flag, createData());
+            // 根据select选项获取数据
+            var dataList = createData();
+            createNewTable(flag, dataList);
+
+        //    渲染柱状图
+            var maxHeight = getMaxHeight(dataList);
+            createSvg(dataList, maxHeight);
+
+        //    渲染折线图
+            createLineChat(dataList, maxHeight);
+
         }
     });
 }

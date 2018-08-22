@@ -21,61 +21,88 @@ function createNewTable(flag, dataList) {
     switch (flag) {
         case "00":
             for (let i in dataList) {
-                tBody += "<tr><td>" + dataList[i]["product"] + "</td><td>" + dataList[i]["region"] + "</td>";
+                tBody += "<tr data-index='" + i + "'><td data-index='" + i + "'>" + dataList[i]["product"] + "</td><td>" + dataList[i]["region"] + "</td>";
                 for (let j in dataList[i]["sale"]) {
-                    tBody += "<td>" + dataList[i]["sale"][j] + "</td>";
+                    tBody += "<td data-index='" + i + "'>" + dataList[i]["sale"][j] + "</td>";
                 }
                 tBody += "</tr>";
             }
             break;
         case "01":
             for (let i in dataList) {
-                tBody += "<tr>";
+                tBody += "<tr data-index='" + i + "'>";
                 if (i == 0) {
-                    tBody += "<td rowspan='" + dataList.length +"'>" + dataList[i]["product"] + "</td><td>" + dataList[i]["region"] + "</td>";
+                    tBody += "<td data-index='" + i + "' rowspan='" + dataList.length +"'>" + dataList[i]["product"] + "</td><td>" + dataList[i]["region"] + "</td>";
                 }
                 else {
-                    tBody += "<td>" + dataList[i]["region"] + "</td>";
+                    tBody += "<td data-index='" + i + "'>" + dataList[i]["region"] + "</td>";
                 }
                 for(let j in dataList[i]["sale"]) {
-                    tBody   += "<td>" + dataList[i]["sale"][j] + "</td>";
+                    tBody   += "<td data-index='" + i + "'>" + dataList[i]["sale"][j] + "</td>";
                 }
                 tBody += "</tr>";
             }
             break;
         case "10":
             for (let i in dataList) {
-                tBody += "<tr>";
+                tBody += "<tr data-index='" + i + "'>";
                 if (i == 0) {
-                    tBody += "<td rowspan='" + dataList.length +"'>" + dataList[i]["region"] + "</td><td>" + dataList[i]["product"] + "</td>";
+                    tBody += "<td data-index='" + i + "' rowspan='" + dataList.length +"'>" + dataList[i]["region"] + "</td><td>" + dataList[i]["product"] + "</td>";
                 }
                 else {
-                    tBody += "<td>" + dataList[i]["product"] + "</td>";
+                    tBody += "<td data-index='" + i + "'>" + dataList[i]["product"] + "</td>";
                 }
                 for(let j in dataList[i]["sale"]) {
-                    tBody   += "<td>" + dataList[i]["sale"][j] + "</td>";
+                    tBody   += "<td data-index='" + i + "'>" + dataList[i]["sale"][j] + "</td>";
                 }
                 tBody += "</tr>";
             }
             break;
         case "11":
             for (let i=0;i<dataList.length;i++) {
-                tBody += "<tr>";
+                tBody += "<tr data-index='" + i + "'>";
                 // console.log(i % regionChecked.length + ",i=" + i + ",region=" + regionChecked.length + dataList[i]["product"]);
                 if (i % regionChecked.length == 0) {
-                    tBody +=  "<td rowspan= '" + regionChecked.length + "'>" + dataList[i]["product"] + "</td><td>" + dataList[i]["region"]+"</td>";
+                    tBody +=  "<td data-index='" + i + "' rowspan= '" + regionChecked.length + "'>" + dataList[i]["product"] + "</td><td>" + dataList[i]["region"]+"</td>";
                 }
                 else {
-                    tBody += "<td>" + dataList[i]["region"] + "</td>";
+                    tBody += "<td data-index='" + i + "'>" + dataList[i]["region"] + "</td>";
                 }
                 for(let j in dataList[i]["sale"]) {
-                    tBody += "<td>" + dataList[i]["sale"][j] + "</td>";
+                    tBody += "<td data-index='" + i + "'>" + dataList[i]["sale"][j] + "</td>";
                 }
                 tBody += "</tr>";
             }
         }
     var html = tHead + tBody;
     table.innerHTML = html ;
+
+    // 监听表格鼠标事件
+    // 获取对应tr或者td的商品及区域的自定义属性
+    table.addEventListener("mouseover", function(ev) {
+        ev = ev || window.event;
+        var target = ev.target || ev.srcElement;
+        if(target.nodeName.toLowerCase() == "tr" || target.nodeName.toLowerCase() == "td" ) {
+            // 获取对应tr或者td的商品及区域的自定义属性
+            // 根据上面两个属性在数据中获取对应的12个月的数据
+            var index = target.dataset.index;
+            var dataList = [];
+            dataList.push(sourceData[index]);
+            var maxHeight = getMaxHeight(dataList);
+            // 调用图表的设置数据方式
+            createLineChat(dataList, maxHeight);
+            createSvg(dataList, maxHeight);
+        }
+    });
+
+    // 鼠标移开表格时图表默认显示全部数据
+    table.addEventListener("mouseleave", function(ev) {
+        var dataList = createData();
+        var maxHeight = getMaxHeight(dataList);
+        // 调用图表的设置数据方式
+        createLineChat(dataList, maxHeight);
+        createSvg(dataList, maxHeight);
+    });
 }
 
 
@@ -127,3 +154,4 @@ function createTableHead(flag) {  //flag判断选择了的地区和商品数量
     head = head + month + "</tr></thead>";
     return head;
 }
+
