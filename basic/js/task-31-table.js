@@ -63,7 +63,7 @@ function createNewTable(flag, dataList) {
                 tBody += "<tr data-index='" + i + "'>";
                 // console.log(i % regionChecked.length + ",i=" + i + ",region=" + regionChecked.length + dataList[i]["product"]);
                 if (i % regionChecked.length == 0) {
-                    tBody +=  "<td data-index='" + i + "' rowspan= '" + regionChecked.length + "'>" + dataList[i]["product"] + "</td><td>" + dataList[i]["region"]+"</td>";
+                    tBody +=  "<td data-index='" + i + "' rowspan= '" + regionChecked.length + "'>" + dataList[i]["product"] + "</td><td data-index='" + i + "'>" + dataList[i]["region"]+"</td>";
                 }
                 else {
                     tBody += "<td data-index='" + i + "'>" + dataList[i]["region"] + "</td>";
@@ -86,22 +86,22 @@ function createNewTable(flag, dataList) {
             // 获取对应tr或者td的商品及区域的自定义属性
             // 根据上面两个属性在数据中获取对应的12个月的数据
             var index = target.dataset.index;
-            var dataList = [];
-            dataList.push(sourceData[index]);
-            var maxHeight = getMaxHeight(dataList);
+            var newDataList = [];
+            newDataList.push(sourceData[index]);
+            var maxHeight = getMaxHeight(newDataList);
             // 调用图表的设置数据方式
-            createLineChat(dataList, maxHeight);
-            createSvg(dataList, maxHeight);
+            createLineChat(newDataList, maxHeight);
+            createSvg(newDataList, maxHeight);
         }
     });
 
     // 鼠标移开表格时图表默认显示全部数据
     table.addEventListener("mouseleave", function(ev) {
-        var dataList = createData();
-        var maxHeight = getMaxHeight(dataList);
+        var newDataList = createData();
+        var maxHeight = getMaxHeight(newDataList);
         // 调用图表的设置数据方式
-        createLineChat(dataList, maxHeight);
-        createSvg(dataList, maxHeight);
+        createLineChat(newDataList, maxHeight);
+        createSvg(newDataList, maxHeight);
     });
 }
 
