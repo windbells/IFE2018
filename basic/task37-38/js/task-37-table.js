@@ -91,7 +91,7 @@ function createNewTable(flag, dataList) {
             // 根据上面两个属性在数据中获取对应的12个月的数据
             let index = target.dataset.index.charAt(0);
             let newDataList = [];
-            newDataList.push(sourceData[index]);
+            newDataList.push(localDataList[index]);
             let maxHeight = getMaxHeight(newDataList);
             // 调用图表的设置数据方式
             createLineChat(newDataList, maxHeight);
