@@ -175,6 +175,7 @@ function createNewTable(flag, dataList) {
                 localDataList[trIndex]["sale"][tdIndex] = rawData;
                 //重新渲染页面
                 let dataList = createData();
+                localDataList = dataList;
                 createNewTable(flag, dataList);
 
                 //    渲染柱状图
@@ -213,6 +214,7 @@ function createNewTable(flag, dataList) {
                     localDataList[trIndex]["sale"][tdIndex] = rawData;
                     //重新渲染页面
                     let dataList = createData();
+                    localDataList = dataList;
                     createNewTable(flag, dataList);
 
                     //    渲染柱状图
