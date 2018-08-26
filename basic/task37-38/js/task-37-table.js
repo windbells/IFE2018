@@ -92,6 +92,7 @@ function createNewTable(flag, dataList) {
             let index = target.dataset.index.charAt(0);
             let newDataList = [];
             newDataList.push(localDataList[index]);
+            console.log(JSON.stringify(localDataList));
             let maxHeight = getMaxHeight(newDataList);
             // 调用图表的设置数据方式
             createLineChat(newDataList, maxHeight);

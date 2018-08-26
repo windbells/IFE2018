@@ -41,6 +41,7 @@ function createCheckBox(checkBox, data) {
             flag = judgeRegAndPro(); //判断商品和地区的选中个数
             // 根据select选项获取数据
             let dataList = createData();
+            localDataList = dataList;
             createNewTable(flag, dataList);
 
             //    渲染柱状图
