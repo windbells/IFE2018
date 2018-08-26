@@ -1,27 +1,27 @@
 function createLineChat(dataList, maxHeight) {
     // 轴的高度，宽度
-    var axisHeight = 200;
+    let axisHeight = 200;
     //定义第一个点距离坐标轴的位置
-    var firstPadding = 20;
+    let firstPadding = 20;
     //定义坐标轴的偏移量
-    var offset = 25;
+    let offset = 25;
     // 定义好每两个数据点之间的横向间隔距离
-    var linePadding = 47;
+    let linePadding = 47;
     // 定义好每一个数据点的直径
-    var radius = 5;
+    let radius = 5;
 
     // 根据Max和你用来绘制折线图图像区域的高度，进行一个数据和像素的折算比例
     //定义x轴月份的位置
-    var axisTextX = [];
+    let axisTextX = [];
     for (let i = 0; i < 12; i++) {
         axisTextX.push(i * linePadding + firstPadding + offset);
     }
-    var ratio = (axisHeight / maxHeight).toFixed(2);
+    let ratio = (axisHeight / maxHeight).toFixed(2);
     //绘制横轴及纵轴
-    var canvas = document.getElementById("line");
+    let canvas = document.getElementById("line");
     canvas.height = canvas.height; //清除画布
     if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
+        let ctx = canvas.getContext("2d");
 
         //画坐标轴的线
         ctx.beginPath();

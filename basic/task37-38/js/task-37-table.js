@@ -15,8 +15,8 @@ function getCheckBox(checkBox) {
 
 //渲染新的表格
 function createNewTable(flag, dataList) {
-    var tHead = createTableHead(flag); //获取表头
-    var tBody = "";
+    let tHead = createTableHead(flag); //获取表头
+    let tBody = "";
     //输出每一行的表格HTML内容
     switch (flag) {
         case "00":
@@ -78,21 +78,21 @@ function createNewTable(flag, dataList) {
             }
             break;
     }
-    var html = tHead + tBody;
+    let html = tHead + tBody;
     table.innerHTML = html ;
 
     // 监听表格鼠标事件
     // 获取对应tr或者td的商品及区域的自定义属性
     table.addEventListener("mouseover", function(ev) {
         ev = ev || window.event;
-        var target = ev.target || ev.srcElement;
+        let target = ev.target || ev.srcElement;
         if(target.nodeName.toLowerCase() == "td" ) {
             // 获取对应tr或者td的商品及区域的自定义属性
             // 根据上面两个属性在数据中获取对应的12个月的数据
-            var index = target.dataset.index.charAt(0);
-            var newDataList = [];
+            let index = target.dataset.index.charAt(0);
+            let newDataList = [];
             newDataList.push(sourceData[index]);
-            var maxHeight = getMaxHeight(newDataList);
+            let maxHeight = getMaxHeight(newDataList);
             // 调用图表的设置数据方式
             createLineChat(newDataList, maxHeight);
             createSvg(newDataList, maxHeight);
@@ -105,8 +105,8 @@ function createNewTable(flag, dataList) {
 
     // 鼠标移开表格时图表默认显示全部数据
     table.addEventListener("mouseleave", function(ev) {
-        var newDataList = createData();
-        var maxHeight = getMaxHeight(newDataList);
+        let newDataList = createData();
+        let maxHeight = getMaxHeight(newDataList);
         // 调用图表的设置数据方式
         createLineChat(newDataList, maxHeight);
         createSvg(newDataList, maxHeight);
@@ -114,8 +114,8 @@ function createNewTable(flag, dataList) {
 
     // text文本框focus事件，记录某一文本框在blur之前的数据，以便于输入不合法时重新设置为该数据
     table.addEventListener("focus",function(ev) {
-        var ev = ev || window.event;
-        var target = event.target || ev.srcElement;
+        ev = ev || window.event;
+        let target = event.target || ev.srcElement;
         if(target.nodeName.toLowerCase() == "input"){
             rawData = target.value;
         }
@@ -123,9 +123,9 @@ function createNewTable(flag, dataList) {
 
     // text文本框blur事件  blur后如果数据不合法则恢复原来的数据
     table.addEventListener("blur",function(ev){
-        var ev = ev || window.event;
-        var target = ev.target || ev.srcElement;
-        var td = target.parentNode;
+        ev = ev || window.event;
+        let target = ev.target || ev.srcElement;
+        let td = target.parentNode;
         if(target.nodeName.toLowerCase() == "input"){
             if(!isLegal(target.value)){
                 alert("输入数据不合法!");
@@ -141,13 +141,13 @@ function createNewTable(flag, dataList) {
     // 文本域上的点击事件
     table.addEventListener("click",function(ev) {
         ev = ev || window.event;
-        var target = ev.target || ev.srcElement;
-        var td = target.parentNode;
-        var nodeName = target.nodeName.toLowerCase();
+        let target = ev.target || ev.srcElement;
+        let td = target.parentNode;
+        let nodeName = target.nodeName.toLowerCase();
         // 确定点击事件
         if (nodeName.indexOf("em")!= -1 || nodeName == "span") { //点击了span文本框或者是编辑
             clearEffect(target, table);
-            var emClassName = target.className;
+            let emClassName = target.className;
             if (nodeName == "span" || emClassName == "edit") {
                 td.childNodes[0].classList.remove("active");
                 td.childNodes[1].classList.remove("active");
@@ -169,15 +169,15 @@ function createNewTable(flag, dataList) {
                 td.childNodes[4].classList.remove("active");
                 td.childNodes[5].classList.remove("active");
                 td.childNodes[0].classList.add("active");
-                var trIndex = td.dataset.index.charAt(0);
-                var tdIndex = td.dataset.index.substring(1); //获得要修改数据的自定义属性，以存储数据
-                sourceData[trIndex]["sale"][tdIndex] = rawData;
+                let trIndex = td.dataset.index.charAt(0);
+                let tdIndex = td.dataset.index.substring(1); //获得要修改数据的自定义属性，以存储数据
+                localDataList[trIndex]["sale"][tdIndex] = rawData;
                 //重新渲染页面
                 let dataList = createData();
                 createNewTable(flag, dataList);
 
                 //    渲染柱状图
-                var maxHeight = getMaxHeight(dataList);
+                let maxHeight = getMaxHeight(dataList);
                 createSvg(dataList, maxHeight);
 
                 //    渲染折线图
@@ -185,21 +185,71 @@ function createNewTable(flag, dataList) {
 
 
                 //    保存数据到本地
-                var storage = window.localStorage;
+                let storage = window.localStorage;
                 storage.clear();
-                storage.setItem("data", JSON.stringify(sourceData));
+                storage.setItem("data", JSON.stringify(dataList));
             }
         }
     });
 
+    //键盘事件
+    table.addEventListener("keydown", function (ev) {
+        ev = ev || window.event;
+        let target = ev.target || ev.srcElement;
+        if (target.nodeName.toLowerCase() == "input") {
+            let keyCode = ev.keyCode;
+            if (/^13|27$/.test(keyCode)) {
+                ev.preventDefault();
+                let td = target.parentNode;
+                if (keyCode == 13) { //按下了Enter
+                    td.childNodes[1].classList.remove("active");
+                    td.childNodes[2].classList.remove("active");
+                    td.childNodes[4].classList.remove("active");
+                    td.childNodes[5].classList.remove("active");
+                    td.childNodes[0].classList.add("active");
+                    let trIndex = td.dataset.index.charAt(0);
+                    let tdIndex = td.dataset.index.substring(1); //获得要修改数据的自定义属性，以存储数据
+                    localDataList[trIndex]["sale"][tdIndex] = rawData;
+                    //重新渲染页面
+                    let dataList = createData();
+                    createNewTable(flag, dataList);
 
+                    //    渲染柱状图
+                    let maxHeight = getMaxHeight(dataList);
+                    createSvg(dataList, maxHeight);
+
+                    //    渲染折线图
+                    createLineChat(dataList, maxHeight);
+
+
+                    //    保存数据到本地
+                    let storage = window.localStorage;
+                    storage.clear();
+                    storage.setItem("data", JSON.stringify(dataList));
+                } else {
+                    td.childNodes[2].classList.remove("active");
+                    td.childNodes[4].classList.remove("active");
+                    td.childNodes[5].classList.remove("active");
+                    td.childNodes[0].classList.add("active");
+                    td.childNodes[1].classList.add("active");
+                }
+            }
+        }
+    });
 
 }
 
 
 //生成对应选择了的复选框的表格数据，优先从本地存储中取数据
 function createData() {
-    var dataList = [];
+    for (let i in localDataList) {
+        for (let j in sourceData) {
+            if (localDataList[i]["region"] == sourceData[j]["region"] && localDataList[i]["product"] == sourceData[j]["product"]) {
+                sourceData[j]["sale"] = localDataList[i]["sale"];
+            }
+        }
+    }
+    let dataList = [];
     //遍历原始数据
     for(let i in sourceData) {
         if(regionChecked.indexOf(sourceData[i]["region"]) != -1 && productChecked.indexOf(sourceData[i]["product"]) != -1) {
@@ -211,7 +261,7 @@ function createData() {
 
 //判断选择了的地区和商品数量
 function judgeRegAndPro() {
-    var flag;
+    let flag;
     if (productChecked.length > 1 && regionChecked.length > 1)
         flag = "11"; //当商品和地区都选择了多于一个的情况下
     else if (productChecked.length == 1 && regionChecked.length > 1)
@@ -227,10 +277,10 @@ function judgeRegAndPro() {
 function createTableHead(flag) {  //flag判断选择了的地区和商品数量
     if (!flag)
         return "";
-    var head = "<thead><tr>";
-    var month = "";
-    var product = "<th>商品</th>";
-    var region = "<th>地区</th>";
+    let head = "<thead><tr>";
+    let month = "";
+    let product = "<th>商品</th>";
+    let region = "<th>地区</th>";
     if (flag == "10" ) { //当地区选择了一个，商品选择了多个的时候
         head += region; //先加载地区
         head += product;  //再加载商品

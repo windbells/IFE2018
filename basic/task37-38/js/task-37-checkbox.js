@@ -1,5 +1,5 @@
 function createCheckBox(checkBox, data) {
-    var html = "";  // 生成全选checkbox的html
+    let html = "";  // 生成全选checkbox的html
     let checkAll = "<input type='checkbox' value='all' data-index='all'/>" + "全选"; // 给一个自定义属性data-index=all表示为全选checkbox
     html += checkAll;
     //遍历参数对象
@@ -13,17 +13,17 @@ function createCheckBox(checkBox, data) {
     //定义事件委托机制，监听复选框的点击事件
     checkBox.addEventListener("click", function(ev) {
         ev = ev || window.event;
-        var target = ev.target || ev.srcElement;
+        let target = ev.target || ev.srcElement;
         if(target.nodeName.toLowerCase() == "input") {
             // 读取自定义属性
-            var index = target.dataset.index;
-            var selector = "#" + checkBox.id + " input";
-            var inputList = document.querySelectorAll(selector);
+            let index = target.dataset.index;
+            let selector = "#" + checkBox.id + " input";
+            let inputList = document.querySelectorAll(selector);
             if (index == "all") { //如果是全选，做全选对应的逻辑
                 checkedAll(inputList);
             }
             else {
-                var count = countSelect(inputList);
+                let count = countSelect(inputList);
                 if (count == 3) {
                     checkedAll(inputList);
                 }
@@ -43,15 +43,15 @@ function createCheckBox(checkBox, data) {
             let dataList = createData();
             createNewTable(flag, dataList);
 
-        //    渲染柱状图
-            var maxHeight = getMaxHeight(dataList);
+            //    渲染柱状图
+            let maxHeight = getMaxHeight(dataList);
             createSvg(dataList, maxHeight);
 
-        //    渲染折线图
+            //    渲染折线图
             createLineChat(dataList, maxHeight);
 
-        //    保存数据到本地
-            var storage = window.localStorage;
+            //    保存数据到本地
+            let storage = window.localStorage;
             storage.clear();
             storage.setItem("data", JSON.stringify(dataList));
         }
@@ -73,7 +73,7 @@ function clearAll(checkList) {
 
 // 计算有多少个选中的复选框
 function countSelect(checkList) {
-    var count = 0; //计算有多少个checkbox被选中
+    let count = 0; //计算有多少个checkbox被选中
     for (let i=1;i<checkList.length;i++) {
         if (checkList[i].checked)
             count++;

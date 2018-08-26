@@ -95,8 +95,8 @@ window.onload=function(){
     if(window.localStorage){
         localDataList = JSON.parse(localStorage.getItem("data"));
         if (localDataList.length > 0) {
-            var regCheckList = "";
-            var proCheckList = "";
+            let regCheckList = "";
+            let proCheckList = "";
             for (let i in localDataList) {
                 let region = localDataList[i]["region"];
                 let product = localDataList[i]["product"];
@@ -107,12 +107,12 @@ window.onload=function(){
                     proCheckList += product;
                 }
             }
-            var regSelector = "#" + regionCheckBox.id + " input";
-            var proSelector= "#" + productCheckBox.id + " input";
-            var regCheckBoxs = document.querySelectorAll(regSelector);
-            var proCheckBoxs = document.querySelectorAll(proSelector);
-            var countReg = 0; //计算本地数据中有多少复选框被选中
-            var countPro = 0;
+            let regSelector = "#" + regionCheckBox.id + " input";
+            let proSelector= "#" + productCheckBox.id + " input";
+            let regCheckBoxs = document.querySelectorAll(regSelector);
+            let proCheckBoxs = document.querySelectorAll(proSelector);
+            let countReg = 0; //计算本地数据中有多少复选框被选中
+            let countPro = 0;
             for (let i=1;i<regCheckBoxs.length;i++) {
                 if (regCheckList.indexOf(regCheckBoxs[i].value) != -1) {
                     regCheckBoxs[i].checked = true;
@@ -139,7 +139,7 @@ window.onload=function(){
             createNewTable(flag, localDataList);
 
             //    渲染柱状图
-            var maxHeight = getMaxHeight(localDataList);
+            let maxHeight = getMaxHeight(localDataList);
             createSvg(localDataList, maxHeight);
 
             //    渲染折线图

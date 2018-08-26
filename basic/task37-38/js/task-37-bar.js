@@ -1,14 +1,14 @@
 function createSvg(dataList, maxHeight) {
     // 定义用来绘制柱状图图像区域的高度
-    var axisHeight = 200;
+    let axisHeight = 200;
     // 拿到柱状图中的最大值Max，进行一个数据和像素的折算比例
-    var ratio = (axisHeight/maxHeight).toFixed(2);
+    let ratio = (axisHeight/maxHeight).toFixed(2);
     // console.log(ratio + "\t" + maxHeight);
 
     // 绘制横轴及纵轴
-    var svg = document.getElementById("bar");
-    var axis = createAxis(maxHeight);
-    var bar = createBar(dataList, ratio, barColors);
+    let svg = document.getElementById("bar");
+    let axis = createAxis(maxHeight);
+    let bar = createBar(dataList, ratio, barColors);
     svg.innerHTML = axis + bar;
 
 }
@@ -16,13 +16,13 @@ function createSvg(dataList, maxHeight) {
 
 //建立坐标轴
 function createAxis(maxHeight) {
-    var html = "";
+    let html = "";
     // 柱子的间隔宽度
-    var barPadding = 10;
+    let barPadding = 10;
     //定义好每一个柱子的宽度
-    var barWidth = 36;
+    let barWidth = 36;
     //定义x轴月份的位置
-    var axisTextX = [];
+    let axisTextX = [];
     for (let i = 1; i <= 12; i++) {
         axisTextX.push((i*(barWidth+barPadding))-barWidth/2+barPadding);
         // console.log((i*(barWidth+barPadding))-barWidth/2+barPadding);
@@ -51,14 +51,14 @@ function createAxis(maxHeight) {
 // createAxis(710);
 
 function createBar(dataList, radio, barColors) {
-    var html= "";
+    let html= "";
     // 柱子的间隔宽度
-    var barPadding = 10;
+    let barPadding = 10;
     //定义每月柱子的总宽度
-    var barWidth = 36;
-    var barEvery = barWidth / dataList.length;
+    let barWidth = 36;
+    let barEvery = barWidth / dataList.length;
     //定义每个月份的第一个柱子的x轴起始位置
-    var axisBarX = [];
+    let axisBarX = [];
     for (let i = 0; i < 12; i++) {
         axisBarX.push((i*(barWidth+barPadding))+ barPadding + 25);
     }
@@ -80,13 +80,13 @@ function createBar(dataList, radio, barColors) {
 
 function getMaxHeight(dataList) {
     //将传进来的数据的销售数据存在数组中
-    var saleList = [];
+    let saleList = [];
     for (let i in dataList) {
         saleList.push(dataList[i]["sale"]);
     }
     //转化为一维数组
-    var saleOneDim = saleList.join(",").split(",");
+    let saleOneDim = saleList.join(",").split(",");
     //求数组中的最大值
-    var maxHeight = Math.max.apply(null, saleOneDim);
+    let maxHeight = Math.max.apply(null, saleOneDim);
     return maxHeight;
 }
