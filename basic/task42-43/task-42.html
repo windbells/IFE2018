@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第四十二天到第四十三天：开一家餐厅吧（一）</title>
+</head>
+<body>
+
+</body>
+<script src="js/restaurant.js"></script>
+<script src="js/dish.js"></script>
+<script src="js/customer.js"></script>
+<script src="js/staff.js"></script>
+
+<script>
+    var ifeRestaurant = new Restaurant({
+        cash: 1000000,
+        seats: 20,
+        staff: []
+    });
+
+    var newCook = new Cook("Tony", 10000);
+    ifeRestaurant.hire(newCook);
+
+    console.log(ifeRestaurant.staff);
+
+    ifeRestaurant.fire(newCook);
+    console.log(ifeRestaurant.staff);
+</script>
+</html>
