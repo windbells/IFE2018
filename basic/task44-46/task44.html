@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第四十二天到第四十三天：开一家餐厅吧（一）</title>
+</head>
+<body>
+
+</body>
+<script src="js/restaurant.js"></script>
+<script src="js/dish.js"></script>
+<script src="js/customer.js"></script>
+<script src="js/staff.js"></script>
+
+<script>
+
+//  创建一个餐厅
+    let restaurant = new Restaurant({
+        cash: 233333333,
+        seats: 1,
+        staff:[]
+    });
+
+    //创建一个服务员
+    Waiter.getInstance("Kina","2333");
+    restaurant.hire(Waiter.getInstance());
+    //创建一个厨师
+    Cook.getInstance("nana","2333");
+    restaurant.hire(Cook.getInstance());
+    console.log(JSON.stringify(restaurant.staff));
+
+    //顾客列表
+    let customers = [];
+    let c1 = new Customer();
+    let c2 = new Customer();
+    customers.push(c1);
+    customers.push(c2);
+
+//   菜单
+    let dishList = [];
+    dishList.push(new Dish("酸菜鱼", 10, 20));
+    dishList.push(new Dish("烤鱼", 30, 50));
+    dishList.push(new Dish("麻辣香锅", 10, 40));
+    dishList.push(new Dish("烤肉", 18, 38));
+
+    //招呼顾客
+    for (let i=0;i<customers.length;i++) {
+        let random = Math.floor(Math.random() * dishList.length);
+        let dish = dishList[random];
+        customers[i].order(dish.name);
+        Waiter.getInstance().doWork(dish.name);
+        customers[i].eat(dish.name);
+    }
+
+</script>
+</html>
