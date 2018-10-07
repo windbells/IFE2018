@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development --env.dist=false",
+    "dev:dist": "webpack --mode development",
+    "build": "webpack --mode=production --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "san": "^3.6.10"
   }
 }

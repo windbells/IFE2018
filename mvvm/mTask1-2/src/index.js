@@ -1,11 +1,13 @@
-import _ from 'lodash';
-function component() {
-    var element = document.createElement('div');
+import san from 'san';
 
-    // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+var MyApp = san.defineComponent({
+    template: '<p>{{text}}!</p>',
 
-    return element;
-}
-
-document.body.appendChild(component());
+    initData: function () {
+        return {
+            text: 'Hello world'
+        };
+    }
+});
+var myApp = new MyApp();
+myApp.attach(document.body);
